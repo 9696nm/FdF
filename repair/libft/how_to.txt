@@ -1,0 +1,85 @@
+- index -
+	How to Libft ?
+
+-is-
+	真偽判断するよ
+		ft_isalpha
+		ft_isdigit
+		ft_isalnum
+		ft_isprint
+		ft_isascii
+	大文字小文字変換するよ
+		ft_toupper
+		ft_tolower
+
+-basic-
+	長さを計るよ
+		ft_strlen
+	文字を探すよ
+		ft_strchr (一番最初に見つけたやつ)
+		ft_strrchr (最後だよ)
+		ft_memchr (長さが指定できるよ)
+		ft_strnstr (文字列だよ)
+	文字列を比較するよ
+		ft_memcmp (byte用だよ)
+		ft_strncmp (文字列用だよ nullとかね)
+
+	埋めれるよ
+		ft_memset
+		ft_bzero (null埋めだよ)
+	n文字分写すよ
+		ft_memcpy (bytecopy用だよ)
+		ft_memmove (srcとdstの重複が定義されてるよ)
+		ft_strlcpy (nullストッパーがあるよ)
+	連結するよ
+		ft_strlcat
+
+	複製するよ
+		ft_strdup
+		ft_substr (開始地点を数字で設定できるよ)
+	連結して複製するよ
+		ft_strjoin
+	文字列をトリムして複製するよ
+		ft_split (char)
+		ft_spplit (string)
+		ft_strtrim (char set,前後からやるよ)
+
+	変換だよ
+		ft_atoi
+		ft_itoa
+
+-mapping-
+	ft_striteri (char *の一文字ずつに関数を適用させるよ)
+	ft_strmapi (適用したものを複製するよ)
+
+-fd-
+	ft_putchar_fd (char)
+	ft_putstr_fd (char *)
+	ft_putendl_fd (さらに改行)
+	ft_putnbr_fd (int)
+
+-list-
+	新しいリストを作るよ
+		ft_lstnew
+	単純に削除するよ
+		ft_lstdelone
+	連結するよ
+		ft_lstadd_front
+		ft_lstadd_back
+
+	関数でを操作するよ
+		ft_lstiter
+
+	最後のポインタを返すよ
+		ft_lstlast
+	サイズを返すよ
+		ft_lstsize
+
+	全解放するよ
+		ft_lstclear
+	フルコピーするよ
+		ft_lstmap
+
+-extra-
+	一行ずつ読むよ
+		get_next_line
