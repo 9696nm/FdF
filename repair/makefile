@@ -1,5 +1,5 @@
 CC			=	cc
-LIBX_FLAGS	=	-lmlx_Linux -lXext -lX11
+LIBX_FLAGS	=	-lmlx_Linux -lXext -lX11 -lm
 LEAK		=	-fsanitize=leak
 
 NAME		=	fdf
