@@ -4,7 +4,7 @@ LEAK		=	-fsanitize=leak
 
 NAME		=	fdf
 SRC_DIR		=	src
-SRC_FILES	=	test.c
+SRC_FILES	=	main.c
 OBJ_DIR 	=	obj
 LIBFT		=	libft
 LIBFTA		=	$(LIBFT)/libft.a

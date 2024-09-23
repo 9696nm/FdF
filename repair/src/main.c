@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:19:43 by hana/hmori        #+#    #+#             */
-/*   Updated: 2024/09/16 22:28:04 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2024/09/21 17:58:52 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 #include <stdio.h>
 
-static double rotate_x(double x, double y, int axis)
+static double rotate_x(double x, double y, double theta)
 {
-	return ((x)*cos(axis*M_PI/180)-(y)*sin(axis*M_PI/180));
+	return ((x)*cos(theta*M_PI/180)-(y)*sin(theta*M_PI/180));
 }
 
-static double rotate_y(double x, double y, int axis)
+static double rotate_y(double x, double y, double theta)
 {
-	return ((x)*sin(axis*M_PI/180)+(y)*cos(axis*M_PI/180));
+	return ((x)*sin(theta*M_PI/180)+(y)*cos(theta*M_PI/180));
 }
 
 static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -31,13 +31,24 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
- }
+}
 
-static void	mlx(int x_axis, int y_axis, int z_axis, int **array)
+static t_point	*set_axis(int **array, t_axis axis)
+{
+
+}
+
+static void	mlx(int **array)
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
+
+	t_axis	axis;
+
+	axis.x = 20;
+	axis.y = 0;
+	axis.z = 30;
 
 	int zoom = 50;
 	int	or_x = 5;
@@ -53,8 +64,8 @@ static void	mlx(int x_axis, int y_axis, int z_axis, int **array)
 	for (int ly=0; array[ly]; ly++)
 		for (int lx=0; lx<array[ly][0]; lx++)
 		{
-			my_mlx_pixel_put(&img, (int)(rotate_x(rotate_x(lx-or_x, ly-or_y, z_axis), array[ly][lx+1]*or_z, y_axis)*zoom+SIZE_X/2),
-				(int)(rotate_x(rotate_y(lx-or_x, ly-or_y, z_axis), array[ly][lx+1]*or_z, x_axis)*zoom+SIZE_Y/2), 0x00FFF000);
+			my_mlx_pixel_put(&img, (int)(rotate_x(rotate_x(lx-or_x, ly-or_y, axis.z), array[ly][lx+1]*or_z, axis.y)*zoom+SIZE_X/2),
+				(int)(rotate_x(rotate_y(lx-or_x, ly-or_y, axis.z), array[ly][lx+1]*or_z, axis.x)*zoom+SIZE_Y/2), 0x00FFF000);
 		}
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
@@ -118,7 +129,7 @@ int	main(int argc, char *argv[])
 	fd = open(argv[1], O_RDONLY);
 	array = assig_arr(fd, 0);
 	close(fd);
-	mlx(0, 0, 30, array);
+	mlx(array);
 	int	len = 0;
 	while (array[len])
 		free(array[len++]);

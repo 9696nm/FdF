@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:53:20 by hana/hmori        #+#    #+#             */
-/*   Updated: 2024/09/17 19:01:39 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2024/09/18 16:19:23 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
+
 typedef enum	e_size
 {
 	SIZE_X = 1280,
@@ -46,9 +47,16 @@ typedef struct	s_data
 typedef struct	s_point
 {
 	int	x;
-	int y;
-	int depth;
+	int	y;
+	int	depth;
 }	t_point;
+
+typedef struct	s_axis
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_axis;
 
 int	*ft_split_toi(char const *src, char c);
 
