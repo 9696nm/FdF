@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:53:20 by hana/hmori        #+#    #+#             */
-/*   Updated: 2024/09/18 16:19:23 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2024/09/29 11:57:19 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,20 @@ typedef enum	e_size
 	SIZE_Y = 720
 }	t_size;
 
-typedef struct	s_data
+typedef struct	s_vars
+{
+	void	*mlx;
+	void	*win;
+}	t_vars;
+
+typedef struct	s_imgdata
 {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
-	int		line_length;
+	int		size_line;
 	int		endian;
-}	t_data;
+}	t_idata;
 
 typedef struct	s_point
 {

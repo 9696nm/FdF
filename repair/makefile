@@ -14,7 +14,7 @@ OBJS 		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 all:	$(LIBFT) $(NAME)
 
 $(NAME):	$(OBJS) $(LIBFTA)
-	@$(CC) $(LEAK) $^ $(LIBX_FLAGS) -o $@ 
+	$(CC) $(LEAK) $^ $(LIBX_FLAGS) -o $@ 
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)

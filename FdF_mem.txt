@@ -1,7 +1,23 @@
 
+MiniLibXのインストール
+	~/Documents/setup_data/minilibx_mem$ ここにいろいろ置いてあるよ
+
 MiniLibXとはなんぞや
-	https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
+	https://qiita.com/yickey/items/fb07e06ea8a646335a5e //いんすこ
+	https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html //how to
 	これ読め
 
+<math.h>
+	https://wwws.kobe-c.ac.jp/deguchi/c/math.html
+	
 CG
-	https://zenn.dev/mebiusbox/books/132b654aa02124/viewer/2966c7
+	https://zenn.dev/mebiusbox/books/132b654aa02124/viewer //クォータニオンについて
+
+	円作画
+		https://hiramame-gclab.com/pixelart_basis_antialiasing
+		https://qiita.com/sune2/items/834b17f68f495c570c9f
+
+
+x11
+	~/usr/share/X11$
+	xwininfo -root

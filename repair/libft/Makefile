@@ -6,7 +6,7 @@
 #    By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 18:46:16 by hmori             #+#    #+#              #
-#    Updated: 2024/09/07 01:34:37 by hana/hmori       ###   ########.fr        #
+#    Updated: 2024/09/30 23:34:39 by hana/hmori       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,13 +44,13 @@ endif
 all: $(NAME)
 
 $(NAME): $(TARGET)
-	ar rcs $@ $^
+	@ar rcs $@ $^
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus:
 	@$(MAKE) all flag=1
