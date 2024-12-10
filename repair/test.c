@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:51:13 by hana/hmori        #+#    #+#             */
-/*   Updated: 2024/10/21 21:49:52 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2024/12/02 18:00:39 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,78 @@ static int	circle(t_idata *img, int d, int x, int y)
 	}
 }
 
+void	drawCircleTest(t_idata *img, int centerX, int centerY, int radius, int color)
+{
+	
+}
+
+void drawCircle(t_idata *img, int centerX, int centerY, int radius, int color) {
+	int x = radius;
+	int y = 0;
+	int p = 1 - radius;
+	int	halfcolor = ((color>>16&0xFF)/2)<<16|((color>>8&0xFF)/2)<<8|(color&0xFF)/2;
+	int	i;
+
+	while (y <= x)
+	{
+		my_mlx_pixel_put(img, centerX + x, centerY + y, halfcolor);
+		my_mlx_pixel_put(img, centerX + y, centerY + x, halfcolor);
+		my_mlx_pixel_put(img, centerX - y, centerY + x, halfcolor);
+		my_mlx_pixel_put(img, centerX - x, centerY + y, halfcolor);
+		my_mlx_pixel_put(img, centerX - x, centerY - y, halfcolor);
+		my_mlx_pixel_put(img, centerX - y, centerY - x, halfcolor);
+		my_mlx_pixel_put(img, centerX + y, centerY - x, halfcolor);
+		my_mlx_pixel_put(img, centerX + x, centerY - y, halfcolor);
+		
+		i = x;
+		while (0 < i--)
+		{
+			my_mlx_pixel_put(img, centerX + i, centerY + y, color);
+			my_mlx_pixel_put(img, centerX - i, centerY + y, color);
+			my_mlx_pixel_put(img, centerX + i, centerY - y, color);
+			my_mlx_pixel_put(img, centerX - i, centerY - y, color);
+		}
+		
+		y++;
+		if (p <= 0)
+			p += 2 * y + 1;
+		else
+		{
+			x--;
+
+			i = y;
+			while (0 < i--)
+			{
+				my_mlx_pixel_put(img, centerX + i, centerY + x, color);
+				my_mlx_pixel_put(img, centerX - i, centerY + x, color);
+				my_mlx_pixel_put(img, centerX + i, centerY - x, color);
+				my_mlx_pixel_put(img, centerX - i, centerY - x, color);
+			}
+			p += 2 * (y - x) + 1;
+		}
+	}
+}
+
 static void	mlx(void)
 {
 	t_vars	vars;
 	t_idata	img;
-
 
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, SIZE_X, SIZE_Y, "Hello world!");
 	img.img = mlx_new_image(vars.mlx, SIZE_X, SIZE_Y); 
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.size_line,
 			&img.endian);
-	for (int d=0; d<256; d++)
-		circle(&img, d, SIZE_X/2, SIZE_Y/2);
+	// for (int d=0; d<256; d++)
+	// 	circle(&img, d, SIZE_X/2, SIZE_Y/2);
 	// circle(&img, 10, SIZE_X/2, SIZE_Y/2);
+	// drawCircle(&img, 640, 360, 150, 0x40FF40);
+	drawCircle(&img, 235, 250, 0, 0xFFFFFF);
+	drawCircle(&img, 240, 250, 1, 0xFFFFFF);
+	drawCircle(&img, 245, 250, 2, 0xFFFFFF);
+	drawCircle(&img, 255, 250, 3, 0xFFFFFF);
+	drawCircle(&img, 270, 250, 4, 0xFFFFFF);
+	drawCircle(&img, 300, 250, 10, 0xFFFFFF);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_loop(vars.mlx);
 }
