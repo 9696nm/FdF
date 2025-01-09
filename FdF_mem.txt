@@ -14,9 +14,14 @@ CG
 	https://zenn.dev/mebiusbox/books/132b654aa02124/viewer //クォータニオンについて
 
 	円作画
-		https://hiramame-gclab.com/pixelart_basis_antialiasing
-		https://qiita.com/sune2/items/834b17f68f495c570c9f
+		https://hiramame-gclab.com/pixelart_basis_antialiasing // ドットについて
+		https://qiita.com/sune2/items/834b17f68f495c570c9f //アンチエイリアス
 
+高速平方根
+	https://matsu7874.hatenablog.com/entry/2021/01/09/041332
+	https://note.com/aquarius2911/n/na943a1da60fd
+平方根の底
+	https://www.youtube.com/watch?v=n2Q1Sp7iew4
 
 x11
 	~/usr/share/X11$
