@@ -9,8 +9,14 @@ MiniLibXとはなんぞや
 
 <math.h>
 	https://wwws.kobe-c.ac.jp/deguchi/c/math.html
+
+	セットアップ
+		https://scrapbox.io/42tokyo-42cursus/fdf
 	
 CG
+	プレゼンハム近似
+
+	https://web.wakayama-u.ac.jp/~tokoi/lecture/cg/cgnote03.pdf //線の書き方
 	https://zenn.dev/mebiusbox/books/132b654aa02124/viewer //クォータニオンについて
 
 	円作画
