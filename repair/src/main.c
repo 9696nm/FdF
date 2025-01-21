@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "fdf.h"
 #include <stdio.h>
 
 static double rotate_x(double x, double y, double theta)
@@ -33,10 +33,10 @@ static void	my_mlx_pixel_put(t_idata *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-static t_point	*set_axis(int **array, t_axis axis)
-{
-
-}
+// static t_point	*set_axis(int **array, t_axis axis)
+// {
+// 	;
+// }
 
 static void	mlx(int **array)
 {
@@ -63,7 +63,7 @@ static void	mlx(int **array)
 		for (int lx=0; lx<array[ly][0]; lx++)
 		{
 			my_mlx_pixel_put(&img, (int)(rotate_x(rotate_x(lx-or_x, ly-or_y, axis.z), array[ly][lx+1]*or_z, axis.y)*zoom+SIZE_X/2),
-				(int)(rotate_x(rotate_y(lx-or_x, ly-or_y, axis.z), array[ly][lx+1]*or_z, axis.x)*zoom+SIZE_Y/2), 0x80FF0000);//+(ly*20<<24)
+				(int)(rotate_x(rotate_y(lx-or_x, ly-or_y, axis.z), array[ly][lx+1]*or_z, axis.x)*zoom+SIZE_Y/2), 0x80808080);//+(ly*20<<24)
 		}
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_loop(vars.mlx);
