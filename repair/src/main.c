@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:19:43 by hana/hmori        #+#    #+#             */
-/*   Updated: 2024/10/15 16:07:23 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/24 15:28:10 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	mlx(int **array)
 		for (int lx=0; lx<array[ly][0]; lx++)
 		{
 			my_mlx_pixel_put(&img, (int)(rotate_x(rotate_x(lx-or_x, ly-or_y, axis.z), array[ly][lx+1]*or_z, axis.y)*zoom+SIZE_X/2),
-				(int)(rotate_x(rotate_y(lx-or_x, ly-or_y, axis.z), array[ly][lx+1]*or_z, axis.x)*zoom+SIZE_Y/2), 0x80808080);//+(ly*20<<24)
+				(int)(rotate_x(rotate_y(lx-or_x, ly-or_y, axis.z), array[ly][lx+1]*or_z, axis.x)*zoom+SIZE_Y/2), 0xFFFFFFFF);//+(ly*20<<24)
 		}
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_loop(vars.mlx);
@@ -119,7 +119,7 @@ int	main(int argc, char *argv[])
 	int	fd;
 	int	**array;
 
-	if (argc < 2)
+	if (!(argc == 1))
 	{
 		ft_putstr_fd("format error -> ./fdf [name].fdf\n", STDERR_FILENO);
 		return (0);

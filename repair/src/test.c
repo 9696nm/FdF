@@ -6,11 +6,11 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:51:13 by hana/hmori        #+#    #+#             */
-/*   Updated: 2024/12/02 18:00:39 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/24 15:40:32 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/fdf.h"
+#include "fdf.h"
 #include <stdio.h>
 
 // static void	ft_putbit(unsigned int num, unsigned long int size)
