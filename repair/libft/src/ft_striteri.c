@@ -6,11 +6,11 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 19:15:28 by hmori             #+#    #+#             */
-/*   Updated: 2024/09/06 12:56:11 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/26 16:22:08 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {

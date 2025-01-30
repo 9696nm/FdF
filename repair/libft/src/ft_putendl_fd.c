@@ -6,11 +6,11 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:06:12 by hmori             #+#    #+#             */
-/*   Updated: 2024/09/06 12:56:11 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/26 16:21:31 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {

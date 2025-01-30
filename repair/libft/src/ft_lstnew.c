@@ -6,11 +6,11 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:52:03 by hmori             #+#    #+#             */
-/*   Updated: 2024/09/06 12:56:11 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/26 16:20:35 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 t_list	*ft_lstnew(void *content)
 {

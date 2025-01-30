@@ -40,9 +40,10 @@
 	連結して複製するよ
 		ft_strjoin
 	文字列をトリムして複製するよ
-		ft_split (char)
-		ft_spplit (string)
+		ft_split (charで区切る) 
+		//ft_spplit (stringで区切る) !!休止中
 		ft_strtrim (char set,前後からやるよ)
+		ft_split_toi (int配列として返す 配列の先頭にlenghが格納される)
 
 	変換だよ
 		ft_atoi

@@ -6,11 +6,11 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:07:36 by hmori             #+#    #+#             */
-/*   Updated: 2024/09/06 12:56:11 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/26 16:20:51 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 static void	forword(unsigned char *ch_dest, unsigned char *ch_src, size_t n)
 {

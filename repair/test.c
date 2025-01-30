@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 11:21:49 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 16:20:38 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/01/30 16:06:24 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/01/30 16:06:27 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/fdf.h"
+#include <string.h>
 
-int	ft_lstsize(t_list *lst)
+int	main()
 {
-	int	counter;
+	float		test;
+	uint32_t	cast;
 
-	if (!lst)
-		return (0);
-	counter = 1;
-	while (lst->next)
-	{
-		counter++;
-		lst = lst->next;
-	}
-	return (counter);
+	cast = (0b1) << 31; //sing
+	cast = cast | (0b01111111) << 23; //index
+	cast = cast | (0b0000000) << 16; //fraction
+	cast = cast | (0b00000000) << 8;
+	cast = cast | (0b00000000) << 0;
+	memcpy(&test, &cast, sizeof(cast));
+	printf("%f\n", test);
+	return (0);
 }

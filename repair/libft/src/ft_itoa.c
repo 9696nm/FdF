@@ -6,11 +6,11 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:32:00 by hmori             #+#    #+#             */
-/*   Updated: 2024/09/06 13:48:16 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/26 16:20:03 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 static void	put_on_pchar(int nbr, char *res, size_t len)
 {

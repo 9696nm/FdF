@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   unit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 11:21:49 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 16:20:38 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/01/30 22:49:14 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/01/30 22:49:15 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-int	ft_lstsize(t_list *lst)
-{
-	int	counter;
+// t_dsize	displaysize_init(t_xvar *xvar)
+// {
+// 	t_dsize	dsize;
 
-	if (!lst)
-		return (0);
-	counter = 1;
-	while (lst->next)
-	{
-		counter++;
-		lst = lst->next;
-	}
-	return (counter);
-}
+// 	dsize.width = XDisplayWidth(xvar.display, xvar.screen);
+// 	dsize.height = XDisplayHeight(xvar.display, xvar.screen);
+// }

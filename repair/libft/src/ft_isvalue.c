@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_isvalue.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 11:21:49 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 16:20:38 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/01/26 18:26:22 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/01/26 18:26:36 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+int	ft_isvalue(char *str)
 {
-	int	counter;
-
-	if (!lst)
-		return (0);
-	counter = 1;
-	while (lst->next)
-	{
-		counter++;
-		lst = lst->next;
-	}
-	return (counter);
+	while (('\t' <= *str && *str <= '\r') || *str == ' ')
+		str++;
+	if (*str == '-' || *str == '+')
+		str++;
+	return (ft_isdigit(*str));
 }

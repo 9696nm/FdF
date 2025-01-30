@@ -1,28 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   write_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 11:21:49 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 16:20:38 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/01/30 23:33:04 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/01/30 23:33:23 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-int	ft_lstsize(t_list *lst)
-{
-	int	counter;
-
-	if (!lst)
-		return (0);
-	counter = 1;
-	while (lst->next)
-	{
-		counter++;
-		lst = lst->next;
-	}
-	return (counter);
-}

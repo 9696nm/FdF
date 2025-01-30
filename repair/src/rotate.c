@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 11:21:49 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 16:20:38 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/01/30 12:57:13 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/01/30 12:57:14 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+#include "fdf.h"
+
+float	rotate_x(float x, float y, float theta)
 {
-	int	counter;
+	return (x * cos(theta * M_PI / 180) - y * sin(theta * M_PI / 180));
+}
 
-	if (!lst)
-		return (0);
-	counter = 1;
-	while (lst->next)
-	{
-		counter++;
-		lst = lst->next;
-	}
-	return (counter);
+float	rotate_y(float x, float y, float theta)
+{
+	return (x * sin(theta * M_PI / 180) + y * cos(theta * M_PI / 180));
 }
