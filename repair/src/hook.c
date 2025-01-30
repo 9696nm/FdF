@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 11:21:49 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 16:20:38 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/01/30 12:57:17 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/01/30 12:57:22 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-int	ft_lstsize(t_list *lst)
+int	window_close(int keycode, t_vars *vars)
 {
-	int	counter;
-
-	if (!lst)
-		return (0);
-	counter = 1;
-	while (lst->next)
-	{
-		counter++;
-		lst = lst->next;
-	}
-	return (counter);
+	ft_putstr_fd("window close\n", STDOUT_FILENO);
+	mlx_destroy_image(vars->mlx, vars->idata.img);
+	mlx_destroy_window(vars->mlx, vars->win);
+	exit(0);
+	return (0);
 }

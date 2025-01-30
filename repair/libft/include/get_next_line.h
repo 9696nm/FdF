@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:33:31 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/23 23:41:34 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/26 12:12:06 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ typedef struct s_mem
 static char	*g_memry[FD_MAX];
 
 char	*get_next_line(int fd);
+// char	*get_next_line(int fd, char	*memry[FD_MAX]);
 
 #endif

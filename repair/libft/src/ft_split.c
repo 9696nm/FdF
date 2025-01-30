@@ -10,16 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 static int	section_count(char *str, char c)
 {
 	int	section_len;
 
-	section_len = 1;
-	while (*str)
-		if (*str++ == c)
+	section_len = 0;
+	while (str && *str)
+		if (*str == c)
+			str++;
+		else
+		{
 			section_len++;
+			str = ft_strchr(str, c);
+		}
 	return (section_len);
 }
 
@@ -27,7 +32,13 @@ static int	put_token(char *src, char c, char **res, int token)
 {
 	char	*endp;
 
-	endp = ft_strchr(src, c);
+	while (src && *src == c)
+		src++;
+	res[token] = NULL;
+	if (src && *src)
+		endp = ft_strchr(src, c);
+	else
+		return (0);
 	if (endp)
 		res[token] = ft_substr(src, 0, endp - src);
 	else
@@ -38,10 +49,7 @@ static int	put_token(char *src, char c, char **res, int token)
 			free(res[token]);
 		return (-1);
 	}
-	if (endp && *endp)
-		return (put_token(endp + 1, c, res, token + 1));
-	res[token + 1] = NULL;
-	return (0);
+	return (put_token(endp, c, res, token + 1));
 }
 
 char	**ft_split(char const *src, char c)
@@ -54,7 +62,7 @@ char	**ft_split(char const *src, char c)
 	if (put_token((char *)src, c, res, 0) == -1)
 	{
 		free(res);
-		res = NULL;
+		return (NULL);
 	}
 	return (res);
 }
@@ -83,7 +91,7 @@ char	**ft_split(char const *src, char c)
 
 // __attribute__((destructor))
 // static void destructor() {
-//     system("leaks -q a.out");
+// 	system("leaks -q a.out");
 // }
 
 /*
