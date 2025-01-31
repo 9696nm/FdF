@@ -15,10 +15,10 @@
 
 float	rotate_x(float x, float y, float theta)
 {
-	return (x * cos(theta * M_PI / 180) - y * sin(theta * M_PI / 180));
+	return (x * cos(theta * M_PI / 180 ) - y * sin(theta * M_PI / 180));
 }
 
 float	rotate_y(float x, float y, float theta)
 {
 	return (x * sin(theta * M_PI / 180) + y * cos(theta * M_PI / 180));
-}
+} 
