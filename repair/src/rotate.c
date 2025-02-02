@@ -13,12 +13,12 @@
 
 #include "fdf.h"
 
-float	rotate_x(float x, float y, float theta)
+float	rotate_x(float x, float y, float angle)
 {
-	return (x * cos(theta * M_PI / 180 ) - y * sin(theta * M_PI / 180));
+	return (x * cosf(angle * M_PI / 180) - y * sin(angle * M_PI / 180));
 }
 
-float	rotate_y(float x, float y, float theta)
+float	rotate_y(float x, float y, float angle)
 {
-	return (x * sin(theta * M_PI / 180) + y * cos(theta * M_PI / 180));
+	return (x * sinf(angle * M_PI / 180) + y * cos(angle * M_PI / 180));
 } 

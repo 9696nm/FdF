@@ -62,10 +62,19 @@ typedef struct s_vars
 
 typedef struct s_axis_float
 {
+	float	ax;
+	float	ay;
+	float	az;
+}	t_axisf;
+
+typedef struct s_vector_float
+{
 	float	x;
 	float	y;
 	float	z;
-}	t_axisf;
+}	t_vectorf;
+
+void	mlx(int **array);
 
 // t_dsize	displaysize_init(t_xvar *xvar);
 int		window_close(int keycode, t_vars *vars);

@@ -12,3 +12,7 @@
 
 #include "fdf.h"
 
+void	put_line(void *(f))
+{
+
+}
