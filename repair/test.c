@@ -13,17 +13,39 @@
 #include "include/fdf.h"
 #include <string.h>
 
+void	test_free(char *test)
+{
+	free(test);
+	test = NULL;
+	return ;
+	// printf("%s\n", *test);
+}
+
 int	main()
 {
-	float		test;
-	uint32_t	cast;
+	char	*test;
 
-	cast = (0b1) << 31; //sing
-	cast = cast | (0b01111111) << 23; //index
-	cast = cast | (0b0000000) << 16; //fraction
-	cast = cast | (0b00000000) << 8;
-	cast = cast | (0b00000000) << 0;
-	memcpy(&test, &cast, sizeof(cast));
-	printf("%f\n", test);
+	test = malloc(sizeof(char) * 2);
+	*test = 'a';
+	test_free(test);
+	// free(test);
+	test = NULL;
+	// printf("%s\n", test);
+	ft_printf("%s\n", test);
 	return (0);
 }
+
+// int	main()
+// {
+// 	float		test;
+// 	uint32_t	cast;
+
+// 	cast = (0b1) << 31; //sing
+// 	cast = cast | (0b01111111) << 23; //index
+// 	cast = cast | (0b0000000) << 16; //fraction
+// 	cast = cast | (0b00000000) << 8;
+// 	cast = cast | (0b00000000) << 0;
+// 	memcpy(&test, &cast, sizeof(cast));
+// 	printf("%f\n", test);
+// 	return (0);
+// }
