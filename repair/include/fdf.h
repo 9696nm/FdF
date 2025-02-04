@@ -31,6 +31,18 @@
 
 # include <stdio.h> //!
 
+typedef enum e_displaysize
+{
+	WIDTH = 1280,
+	HEIGHT = 720
+}	t_dsize;
+
+// typedef struct s_displaysize
+// {
+// 	unsigned int	width;
+// 	unsigned int	height;
+// }	t_dsize;
+
 typedef struct s_imgdata
 {
 	void	*img;
@@ -40,18 +52,6 @@ typedef struct s_imgdata
 	int		endian;
 }	t_idata;
 
-typedef enum e_displaysize
-{
-	width = 1280,
-	height = 720
-}	t_dsize;
-
-// typedef struct s_displaysize
-// {
-// 	unsigned int	width;
-// 	unsigned int	height;
-// }	t_dsize;
-
 typedef struct s_vars
 {
 	void	*mlx;
@@ -60,26 +60,37 @@ typedef struct s_vars
 	// t_dsize	dsize;
 }	t_vars;
 
-typedef struct s_axis_float
+typedef struct s_coord
 {
-	float	ax;
-	float	ay;
-	float	az;
-}	t_axisf;
+	float	crd_x;
+	float	crd_y;
+	float	depth;
+}	t_coord;
 
-typedef struct s_vector_float
+typedef struct s_euler_angle_float
 {
-	float	x;
-	float	y;
-	float	z;
-}	t_vectorf;
+	float	ang_x;
+	float	ang_y;
+	float	ang_z;
+}	t_eanglef;
 
-void	mlx(int **array);
+typedef struct s_translation
+{
+	int	set_x;
+	int	set_y;
+	int	set_z;
+}	t_tarns;
 
+void	mlx(char *name, int **array);
+
+void	my_mlx_pixel_put(t_idata *img, int x, int y, int color);
 // t_dsize	displaysize_init(t_xvar *xvar);
 int		window_close(int keycode, t_vars *vars);
 
 float	rotate_x(float x, float y, float theta);
 float	rotate_y(float x, float y, float theta);
+t_coord	rotate_matrix(float vec_x, float vec_y, float vec_z, t_eanglef ang);
+
+void	put_line(t_idata *idata, t_coord endp1, t_coord endp2, int thickness);
 
 #endif

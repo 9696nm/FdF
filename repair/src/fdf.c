@@ -12,17 +12,27 @@
 
 #include "fdf.h"
 
-static t_vectorf	*set_lane(int width)
-{
-	;
-}
+// static t_coord	*set_lane(char **sp_arr, int length, int width)
+// {
+// 	t_coord	*lane;
 
-static int	**assig_arr(int fd, int length) //ft_split_toi recursive function version
+// 	if (sp_arr == NULL)
+// 		return (NULL);
+// 	if (*sp_arr == NULL || **sp_arr == '\n')
+// 		return (ft_calloc(sizeof(t_coord *), (width + 1)));
+// 	lane = set_lane(sp_arr + 1, length, width + 1);
+// 	lane[width].x = width;
+// 	lane[width].y = length;
+// 	lane[width].z = ft_atoi(*sp_arr);
+// }
+
+static int	**assig_arr(int fd, int length, int width_size) //ft_split_toi recursive function version
 {
 	char	*ret;
 	int		*sp_arr;
 	int		**result;
 
+	result = NULL;
 	ret = get_next_line(fd);
 	if (ret == NULL)
 		return (ft_calloc(sizeof(int *), length + 1));
@@ -32,7 +42,10 @@ static int	**assig_arr(int fd, int length) //ft_split_toi recursive function ver
 	free(ret);
 	if (sp_arr == NULL)
 		return (NULL);
-	result = assig_arr(fd, length + 1);
+	if (width_size == 0 || *sp_arr == width_size)
+		result = assig_arr(fd, length + 1, *sp_arr);
+	else
+		ft_putstr_fd("Found wrong line length. Exiting.\n", STDOUT_FILENO);
 	if (result)
 		result[length] = sp_arr;
 	else
@@ -57,13 +70,22 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		ft_putstr_fd("format error -> ./fdf [path].fdf\n", STDOUT_FILENO);
+		ft_putstr_fd("Usage : ./fdf <filename> [ case_size z_size ]\n", STDOUT_FILENO);
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);
-	array = assig_arr(fd, 0);
+	if (fd == -1)
+	{
+		ft_putstr_fd("No file ", STDOUT_FILENO);
+		ft_putstr_fd(argv[1], STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		return (0);
+	}
+	array = assig_arr(fd, 0, 0);
 	close(fd);
-	mlx(array);
+	if (array == NULL)
+		return (0);
+	mlx(*argv, array);
 	double_free(array);
 	return (0);
 }

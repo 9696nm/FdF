@@ -29,7 +29,7 @@ int	main()
 	*test = 'a';
 	test_free(test);
 	// free(test);
-	// test = NULL;
+	test = NULL;
 	// printf("%s\n", test);
 	ft_printf("%s\n", test);
 	return (0);
