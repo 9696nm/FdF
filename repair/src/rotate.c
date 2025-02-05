@@ -31,3 +31,5 @@ t_coord	rotate_matrix(float vec_x, float vec_y, float vec_z, t_eanglef ang)
 	crd.depth = rotate_x(rotate_y(vec_x, vec_z, ang.ang_y), vec_y, ang.ang_x);
 	return (crd);
 }
+
+t_coord	

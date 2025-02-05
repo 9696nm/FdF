@@ -51,8 +51,8 @@ void	mlx(char *name, int **mat_arr)
 
 	int zoom = 50;
 
-	axis = set_axis(45, 0, 0);
-	set = set_trans(2, 2, 0);
+	axis = set_axis(0, 0, 0);
+	set = set_trans(5, 5, 0);
 
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WIDTH, HEIGHT, name);
