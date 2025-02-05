@@ -60,12 +60,20 @@ typedef struct s_vars
 	// t_dsize	dsize;
 }	t_vars;
 
-typedef struct s_coord
+typedef struct s_translation
 {
-	float	crd_x;
-	float	crd_y;
-	float	depth;
-}	t_coord;
+	int	set_x;
+	int	set_y;
+	int	set_z;
+}	t_tarns;
+
+typedef struct s_quaternion_vecter
+{
+	int		vec_x;
+	int		vec_y;
+	int		vec_z;
+	float	theta;
+}	t_quatev;
 
 typedef struct s_euler_angle_float
 {
@@ -74,12 +82,12 @@ typedef struct s_euler_angle_float
 	float	ang_z;
 }	t_eanglef;
 
-typedef struct s_translation
+typedef struct s_coord
 {
-	int	set_x;
-	int	set_y;
-	int	set_z;
-}	t_tarns;
+	float	crd_x;
+	float	crd_y;
+	float	depth;
+}	t_coord;
 
 void	mlx(char *name, int **array);
 

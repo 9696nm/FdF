@@ -11,11 +11,11 @@
 # **************************************************************************** #
 
 CC			=	cc
-FLAGS		=	-I$(INC_DIR)
+FLAGS		=	-I$(INC_DIR) -I$(MLX_DIR)
 CFLAGS		=
 # CFLAGS	 =	-Wall -Wextra -Werror
-LIBX_FLAGS	=	-lmlx_Linux -lXext -lX11 -lm
-# LIBX_FLAGS	=	-lXext -lX11
+# LIBX_FLAGS	=	-lmlx_Linux -lXext -lX11 -lm
+LIBX_FLAGS	=	-Imlx -lXext -lX11 -lm
 
 MAKEFLAGS	+=	--no-print-directory
 
@@ -37,7 +37,8 @@ OBJS 		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 LIBFT		=	libft
 LIBFTA		=	$(LIBFT)/libft.a
 
-LIBMLXA		=	libmlx/libmlx_Linux.a
+MLX_DIR		=	libmlx
+LIBMLXA		=	$(MLX_DIR)/libmlx_Linux.a
 
 all: $(LIBFT) $(NAME)
 
