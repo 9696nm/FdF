@@ -17,7 +17,12 @@ CG
 	プレゼンハム近似
 
 	https://web.wakayama-u.ac.jp/~tokoi/lecture/cg/cgnote03.pdf //線の書き方
-	https://zenn.dev/mebiusbox/books/132b654aa02124/viewer //クォータニオンについて
+
+
+	クォータニオンについて
+		https://zenn.dev/mebiusbox/books/132b654aa02124/viewer //
+		https://kamino.hatenablog.com/entry/rotation_expressions
+		https://qiita.com/kenjihiranabe/items/945232fbde58fab45681
 
 	円作画
 		https://hiramame-gclab.com/pixelart_basis_antialiasing // ドットについて
