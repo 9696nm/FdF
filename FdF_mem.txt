@@ -19,7 +19,9 @@ CG
 	https://web.wakayama-u.ac.jp/~tokoi/lecture/cg/cgnote03.pdf //線の書き方
 
 
-	クォータニオンについて
+	4元数、クォータニオンについて
+		https://www.youtube.com/watch?v=94NmanMgR9k&t=1052s /神
+		https://eater.net/quaternions //視覚化
 		https://zenn.dev/mebiusbox/books/132b654aa02124/viewer //
 		https://kamino.hatenablog.com/entry/rotation_expressions
 		https://qiita.com/kenjihiranabe/items/945232fbde58fab45681
