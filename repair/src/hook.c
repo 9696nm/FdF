@@ -12,7 +12,37 @@
 
 #include "fdf.h"
 
-int	window_close(int keycode, t_vars *vars)
+int	mouse_move(int x, int y, t_vars *vars)
+{
+	printf("x:%d y:%d\n", x, y);
+	return (0);
+}
+
+int	mouse_press(int button, int x, int y, t_vars *vars)
+{
+	printf("bot:%d x:%d y:%d\n", button, x, y);
+	return (0);
+}
+
+int	key_press(int keycode, t_vars *vars)
+{
+	if (keycode == XK_Escape)
+		window_destroy(vars);
+	if (keycode == XK_Up)
+		vars->set.y += 1;
+	else if (keycode == XK_Down)
+		vars->set.y -= 1;
+	else if (keycode == XK_Left)
+		vars->set.x += 1;
+	else if (keycode == XK_Right)
+		vars->set.x -= 1;
+	else
+		return (0);
+	vars->gflag.refresh = GLAPH_ON;
+	return (0);
+}
+
+int	window_destroy(t_vars *vars)
 {
 	ft_putstr_fd("window close\n", STDOUT_FILENO);
 	mlx_destroy_image(vars->mlx, vars->idata.img);

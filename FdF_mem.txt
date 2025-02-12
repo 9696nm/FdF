@@ -18,13 +18,24 @@ CG
 
 	https://web.wakayama-u.ac.jp/~tokoi/lecture/cg/cgnote03.pdf //線の書き方
 
+	複素数の回転
+		https://kosenejuku.com/1540/
 
 	4元数、クォータニオンについて
-		https://www.youtube.com/watch?v=94NmanMgR9k&t=1052s /神
-		https://eater.net/quaternions //視覚化
-		https://zenn.dev/mebiusbox/books/132b654aa02124/viewer //
-		https://kamino.hatenablog.com/entry/rotation_expressions
-		https://qiita.com/kenjihiranabe/items/945232fbde58fab45681
+		3b1b jp
+			https://www.youtube.com/watch?v=94NmanMgR9k&t=1052s /神
+		Visualizing quaternions
+			https://eater.net/quaternions
+		CGのための数学
+			https://zenn.dev/mebiusbox/books/132b654aa02124/viewer
+		組込み技術者のための四元数（クォータニオン）入門
+			https://kumadasu.com/series/quaternion-for-embedded/
+		クォータニオンと回転行列の関係
+			https://recruit.cct-inc.co.jp/tecblog/math/quaternions/
+		Quaternionによる3次元の回転変換
+			https://qiita.com/kenjihiranabe/items/945232fbde58fab45681
+		回転ベクトル・回転行列・クォータニオン・オイラー角についてまとめてみた
+			https://kamino.hatenablog.com/entry/rotation_expressions
 
 	円作画
 		https://hiramame-gclab.com/pixelart_basis_antialiasing // ドットについて

@@ -12,20 +12,6 @@
 
 #include "fdf.h"
 
-// static t_coord	*set_lane(char **sp_arr, int length, int width)
-// {
-// 	t_coord	*lane;
-
-// 	if (sp_arr == NULL)
-// 		return (NULL);
-// 	if (*sp_arr == NULL || **sp_arr == '\n')
-// 		return (ft_calloc(sizeof(t_coord *), (width + 1)));
-// 	lane = set_lane(sp_arr + 1, length, width + 1);
-// 	lane[width].x = width;
-// 	lane[width].y = length;
-// 	lane[width].z = ft_atoi(*sp_arr);
-// }
-
 static int	**assig_arr(int fd, int length, int width_size) //ft_split_toi recursive function version
 {
 	char	*ret;
@@ -89,6 +75,20 @@ int	main(int argc, char *argv[])
 	double_free(array);
 	return (0);
 }
+
+// static t_coord	*set_lane(char **sp_arr, int length, int width)
+// {
+// 	t_coord	*lane;
+
+// 	if (sp_arr == NULL)
+// 		return (NULL);
+// 	if (*sp_arr == NULL || **sp_arr == '\n')
+// 		return (ft_calloc(sizeof(t_coord *), (width + 1)));
+// 	lane = set_lane(sp_arr + 1, length, width + 1);
+// 	lane[width].x = width;
+// 	lane[width].y = length;
+// 	lane[width].z = ft_atoi(*sp_arr);
+// }
 
 // static int	**assig_arr(int fd, int length) //ft_split_toi recursive function version
 // {

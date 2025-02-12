@@ -19,8 +19,10 @@
 # include <math.h>
 
 # include <X11/X.h>
-// # include <X11/keysym.h>
+# include <X11/keysym.h>
+# include <X11/keysymdef.h>
 # include "mlx.h"
+// # include "mlx_int.h"
 
 # include "../libft/include/libft.h"
 # include "../libft/include/get_next_line.h"
@@ -52,35 +54,53 @@ typedef struct s_imgdata
 	int		endian;
 }	t_idata;
 
-typedef struct s_vars
+typedef struct s_quaternion
 {
-	void	*mlx;
-	void	*win;
-	t_idata	idata;
-	// t_dsize	dsize;
-}	t_vars;
+	double	w;
+	double	x;
+	double	y;
+	double	z;
+}	t_quater;
 
 typedef struct s_translation
 {
-	int	set_x;
-	int	set_y;
-	int	set_z;
+	float	x;
+	float	y;
+	float	z;
+	float	zoom;
 }	t_tarns;
 
-typedef struct s_quaternion_vecter
+typedef struct s_mouse_coord
 {
-	int		vec_x;
-	int		vec_y;
-	int		vec_z;
-	float	theta;
-}	t_quatev;
+	int	press_x;
+	int	press_y;
+	int	motion_x;
+	int	motion_y;
+}	t_mcoord;
 
-typedef struct s_euler_angle_float
+typedef enum e_glaphic_flag_name
 {
-	float	ang_x;
-	float	ang_y;
-	float	ang_z;
-}	t_eanglef;
+	GLAPH_ON = 1,
+	GLAPH_OFF = 0
+}	t_gfname;
+
+typedef struct s_glaphic_flag
+{
+	int	refresh;
+}	t_gflag;
+
+typedef struct s_vars
+{
+	void		*mlx;
+	void		*win;
+	t_idata		idata;
+	t_dsize		dsize;
+	int			**mat_arr;
+	t_quater	qv;
+	t_tarns		set;
+	t_mcoord	mcrd;
+	t_gflag		gflag;
+}	t_vars;
 
 typedef struct s_coord
 {
@@ -89,16 +109,30 @@ typedef struct s_coord
 	float	depth;
 }	t_coord;
 
-void	mlx(char *name, int **array);
+// main
+void		mlx(char *name, int **array);
 
-void	my_mlx_pixel_put(t_idata *img, int x, int y, int color);
-// t_dsize	displaysize_init(t_xvar *xvar);
-int		window_close(int keycode, t_vars *vars);
+// mlx unit
+void		my_mlx_pixel_put(t_idata *img, int x, int y, int color);
+// t_dsize		displaysize_init(t_xvar *xvar);
 
-float	rotate_x(float x, float y, float theta);
-float	rotate_y(float x, float y, float theta);
-t_coord	rotate_matrix(float vec_x, float vec_y, float vec_z, t_eanglef ang);
+// hook
+int			mouse_move(int x, int y, t_vars *vars);
+int			mouse_press(int button, int x, int y, t_vars *vars);
+int			key_press(int keycode, t_vars *vars);
+int			window_destroy(t_vars *vars);
 
-void	put_line(t_idata *idata, t_coord endp1, t_coord endp2, int thickness);
+// other unit
+t_tarns		set_trans(int **mat_arr);
+t_coord		set_coord(int crd_x, int crd_y, int depth);
+void		put_line(t_idata *idata, t_coord q1, t_coord q2, int thickness);
+// t_quater	set_quater(float w, float x, float y, float z);
+
+// quaternion action
+t_quater	normalize(t_quater q);
+t_quater	multiply(t_quater q1, t_quater q2);
+t_quater	quater_conjugate(t_quater q);
+t_quater	rotate_vector(t_quater qv, t_quater q);
+t_quater	quaternion_axis_angle(float x, float y, float z, float angle);
 
 #endif

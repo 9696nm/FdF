@@ -13,25 +13,26 @@
 #include "include/fdf.h"
 #include <string.h>
 
-void	test_free(char *test)
-{
-	free(test);
-	test = NULL;
-	return ;
-	// printf("%s\n", *test);
-}
+// void	test_free(char *test)
+// {
+// 	free(test);
+// 	test = NULL;
+// 	return ;
+// 	// printf("%s\n", *test);
+// }
 
 int	main()
 {
-	char	*test;
+	// char	*test;
 
-	test = malloc(sizeof(char) * 2);
-	*test = 'a';
-	test_free(test);
-	// free(test);
-	test = NULL;
-	// printf("%s\n", test);
-	ft_printf("%s\n", test);
+	// test = malloc(sizeof(char) * 2);
+	// *test = 'a';
+	// test_free(test);
+	// // free(test);
+	// test = NULL;
+	// // printf("%s\n", test);
+	// ft_printf("%s\n", test);
+	printf("%f\n", 1-0.5f);
 	return (0);
 }
 
