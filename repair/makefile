@@ -28,7 +28,7 @@ INC_DIR		=	include
 INCLUDE		=	$(INC_DIR)/fdf.h
 
 SRC_DIR		=	src
-SRC_FILES	=	fdf.c graphic.c write_line.c hook.c rotate.c unit.c
+SRC_FILES	=	fdf.c graphic.c write_line.c hook.c quaternion.c unit.c
 # SRC_FILES	=	circle.c
 
 OBJ_DIR 	=	obj
