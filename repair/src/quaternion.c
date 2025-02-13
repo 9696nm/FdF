@@ -13,7 +13,7 @@
 #include "fdf.h"
 
 // Normalisation of quaternions
-t_quater	normalize(t_quater q)
+t_quater	quater_normalize(t_quater q)
 {
 	float	norm;
 
@@ -22,11 +22,11 @@ t_quater	normalize(t_quater q)
 	q.x *= norm;
 	q.y *= norm;
 	q.z *= norm;
-	return q;
+	return (q);
 }
 
 // product of quaternions
-t_quater	multiply(t_quater q1, t_quater q2)
+t_quater	quater_multiply(t_quater q1, t_quater q2)
 {
 	t_quater	result;
 
@@ -50,13 +50,13 @@ t_quater	quater_conjugate(t_quater q)
 }
 
 // Rotation of 3D vectors by quaternions
-t_quater	rotate_vector(t_quater qv, t_quater q)
+t_quater	quater_rotate(t_quater qv, t_quater p)
 {
 	t_quater	q_conj;
 	t_quater	result;
 	
 	q_conj = quater_conjugate(qv);
-	result = multiply(multiply(qv, q), q_conj);
+	result = quater_multiply(quater_multiply(qv, p), q_conj);
 	return (result);
 }
 
@@ -73,7 +73,7 @@ t_quater	quaternion_axis_angle(float x, float y, float z, float angle)
 	q.x = x * s;
 	q.y = y * s;
 	q.z = z * s;
-	return q;
+	return (q);
 }
 
 // float	rotate_x(float x, float y, float angle)
