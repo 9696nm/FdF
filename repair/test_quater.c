@@ -82,7 +82,7 @@ typedef struct {
 } Vector3;
 
 // クォータニオンの正規化
-t_quater normalize(t_quater q) {
+t_quater quater_normalize(t_quater q) {
 		double norm = sqrt(q.w * q.w + q.x * q.x + q.y * q.y + q.z * q.z);
 		q.w /= norm;
 		q.x /= norm;
@@ -92,7 +92,7 @@ t_quater normalize(t_quater q) {
 	}
 	
 	// クォータニオンの積
-t_quater multiply(t_quater q1, t_quater q2) {
+t_quater quater_multiply(t_quater q1, t_quater q2) {
 	t_quater result;
 	result.w = q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z;
 	result.x = q1.w * q2.x + q1.x * q2.w + q1.y * q2.z - q1.z * q2.y;
@@ -105,7 +105,7 @@ t_quater multiply(t_quater q1, t_quater q2) {
 t_quater rotate_vector(t_quater qv, t_quater q) {
 	t_quater q_conjugate = { q.w, -q.x, -q.y, -q.z };
 	
-	t_quater q_res = multiply(multiply(q, qv), q_conjugate);
+	t_quater q_res = quater_multiply(quater_multiply(q, qv), q_conjugate);
 	
 	t_quater result = { q_res.w, q_res.x, q_res.y, q_res.z };
 	return result;
@@ -120,7 +120,7 @@ t_quater quaternion_axis_angle(Vector3 axis, double angle) {
 	q.x = axis.x * s;
 	q.y = axis.y * s;
 	q.z = axis.z * s;
-	return normalize(q);
+	return quater_normalize(q);
 }
 
 int main() {
@@ -129,7 +129,7 @@ int main() {
 	double 		angle = M_PI; // 90度回転
 	
 	t_quater q = quaternion_axis_angle(axis, angle);
-	qv = normalize(qv);
+	qv = quater_normalize(qv);
 	t_quater rotated_v = rotate_vector(qv, q);
 	// rotated_v = rotate_vector(qv, rotated_v);
 	

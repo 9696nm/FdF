@@ -35,8 +35,10 @@
 
 typedef enum e_displaysize
 {
-	WIDTH = 1280,
-	HEIGHT = 720
+	WIDTH = 1920,
+	HEIGHT = 1080
+	// WIDTH = 1280,
+	// HEIGHT = 720
 }	t_dsize;
 
 // typedef struct s_displaysize
@@ -74,19 +76,20 @@ typedef struct s_mouse_coord
 {
 	int	press_x;
 	int	press_y;
-	int	motion_x;
-	int	motion_y;
 }	t_mcoord;
 
 typedef enum e_glaphic_flag_name
 {
 	GLAPH_ON = 1,
-	GLAPH_OFF = 0
+	GLAPH_OFF = 0,
+	MOUSE_PRESS_ON = 1,
+	MOUSE_PRESS_OFF = 0
 }	t_gfname;
 
 typedef struct s_glaphic_flag
 {
 	int	refresh;
+	int	mouse_press;
 }	t_gflag;
 
 typedef struct s_vars
@@ -114,25 +117,28 @@ void		mlx(char *name, int **array);
 
 // mlx unit
 void		my_mlx_pixel_put(t_idata *img, int x, int y, int color);
+void		put_line(t_idata *idata, t_coord q1, t_coord q2, int thickness);
 // t_dsize		displaysize_init(t_xvar *xvar);
 
 // hook
 int			mouse_move(int x, int y, t_vars *vars);
 int			mouse_press(int button, int x, int y, t_vars *vars);
+int			mouse_release(int button, int x, int y, t_vars *vars);
 int			key_press(int keycode, t_vars *vars);
 int			window_destroy(t_vars *vars);
 
 // other unit
 t_tarns		set_trans(int **mat_arr);
 t_coord		set_coord(int crd_x, int crd_y, int depth);
-void		put_line(t_idata *idata, t_coord q1, t_coord q2, int thickness);
-// t_quater	set_quater(float w, float x, float y, float z);
+t_quater	set_quater(float w, float x, float y, float z);
+t_tarns		reverse_quater(t_quater qv, t_quater p, t_tarns set);
+// t_quater	rotate_vector_mouse(t_vars *vars, int x, int y);
 
 // quaternion action
-t_quater	normalize(t_quater q);
-t_quater	multiply(t_quater q1, t_quater q2);
+t_quater	quater_normalize(t_quater q);
+t_quater	quater_multiply(t_quater q1, t_quater q2);
 t_quater	quater_conjugate(t_quater q);
-t_quater	rotate_vector(t_quater qv, t_quater q);
+t_quater	quater_rotate(t_quater qv, t_quater q);
 t_quater	quaternion_axis_angle(float x, float y, float z, float angle);
 
 #endif

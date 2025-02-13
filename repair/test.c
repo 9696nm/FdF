@@ -13,13 +13,13 @@
 #include "include/fdf.h"
 #include <string.h>
 
-// void	test_free(char *test)
-// {
-// 	free(test);
-// 	test = NULL;
-// 	return ;
-// 	// printf("%s\n", *test);
-// }
+void	test_free(char *test)
+{
+	free(test);
+	test = NULL;
+	return ;
+	// printf("%s\n", *test);
+}
 
 int	main()
 {

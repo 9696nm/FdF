@@ -36,37 +36,27 @@ t_coord	set_coord(int crd_x, int crd_y, int depth)
 	return (crd);
 }
 
-void	put_line(t_idata *idata, t_coord q1, t_coord q2, int thickness)
+t_quater	set_quater(float w, float x, float y, float z)
 {
-	int steps;
-	float dx;
-	float dy;
+	t_quater	q;
 
-	dx = q2.crd_x - q1.crd_x;
-	dy = q2.crd_y - q1.crd_y;
-	steps = fabs(dx);
-	if (steps < fabs(dy))
-		steps = fabs(dy);
-	dx = dx / steps;
-	dy = dy / steps;
-	while (steps--)
-	{
-		my_mlx_pixel_put(idata, roundf(q1.crd_x), roundf(q2.crd_x), 0xFFFFFFFF);
-		q1.crd_x += dx;
-		q1.crd_y += dy;
-	}
+	q.w = w;
+	q.x = x;
+	q.y = y;
+	q.z = z;
+	return (q);
 }
 
-// static t_quater	set_quater(float w, float x, float y, float z)
-// {
-// 	t_quater	q;
+t_tarns	reverse_quater(t_quater qv, t_quater p, t_tarns set)
+{
+	t_quater	res;
 
-// 	q.w = w;
-// 	q.x = x;
-// 	q.y = y;
-// 	q.z = z;
-// 	return (q);
-// }
+	res = quater_rotate(quater_conjugate(qv), p);
+	set.x += res.x;
+	set.y += res.y;
+	set.z += res.z;
+	return (set);
+}
 
 // t_dsize	displaysize_init(t_xvar *xvar)
 // {
