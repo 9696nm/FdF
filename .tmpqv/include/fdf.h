@@ -100,6 +100,7 @@ typedef struct s_vars
 	t_dsize		dsize;
 	int			**mat_arr;
 	t_quater	qv;
+	t_quater	tmpqv;
 	t_tarns		set;
 	t_mcoord	mcrd;
 	t_gflag		gflag;

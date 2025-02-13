@@ -43,24 +43,10 @@ void	put_line(t_idata *idata, t_coord q1, t_coord q2, int thickness)
 	}
 }
 
-static t_quater	render_len(int mx, int my, t_idata *newimg, t_vars *vars)
-{
-	t_quater	q;
-	t_quater	next;
-
-	q = quaternion_axis_angle(mx-vars->set.x, my-vars->set.y, vars->mat_arr[my][mx+1]-vars->set.z, M_PI);
-	q = quater_rotate(vars->qv, q);
-	if (vars->mat_arr[my][0] < mx + 1)
-		return (q);
-	next = render_len(mx + 1, my, newimg, vars);
-	put_line(newimg, set_coord(q.x * vars->set.zoom + WIDTH / 2, q.y * vars->set.zoom + HEIGHT / 2, q.z),
-		set_coord(next.x * vars->set.zoom + WIDTH / 2, next.y * vars->set.zoom + HEIGHT / 2, next.z), vars->set.zoom / 10);
-	// my_mlx_pixel_put(newimg, q.x*vars->set.zoom+WIDTH/2, q.y*vars->set.zoom+HEIGHT/2, 0xFF0FF0FF);
-	return (q);
-}
-
 static int	render_frame(t_vars *vars)
 {
+	t_quater	q;
+	t_quater	qv;
 	t_idata		newimg;
 
 	if (vars->gflag.refresh == GLAPH_ON)
@@ -68,14 +54,17 @@ static int	render_frame(t_vars *vars)
 		vars->gflag.refresh = GLAPH_OFF;
 		newimg.img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 		newimg.addr = mlx_get_data_addr(newimg.img, &newimg.bits_per_pixel, &newimg.size_line, &newimg.endian);
-		render_len(0, 0, &newimg, vars);
-		// for (int my=0; vars->mat_arr[my]; my++)
-		// {
-		// 	for (int mx=0; mx<vars->mat_arr[my][0]; mx++)
-		// 	{
-	
-		// 	}
-		// }
+		qv = quater_multiply(vars->qv, vars->tmpqv);
+		for (int my=0; vars->mat_arr[my]; my++)
+		{
+			for (int mx=0; mx<vars->mat_arr[my][0]; mx++)
+			{
+				q = quaternion_axis_angle(mx-vars->set.x, my-vars->set.y, vars->mat_arr[my][mx+1]-vars->set.z, M_PI);
+				q = quater_rotate(qv, q);
+				// put_line(&newimg, set_coord(q.x * vars->set.zoom + WIDTH / 2, q.y * vars->set.zoom + HEIGHT / 2), vars->mat_arr[my][0]), vars->set.zoom / 10);
+				my_mlx_pixel_put(&newimg, q.x*vars->set.zoom+WIDTH/2, q.y*vars->set.zoom+HEIGHT/2, 0xFF0FF0FF);
+			}
+		}
 		mlx_put_image_to_window(vars->mlx, vars->win, newimg.img, 0, 0);
 		mlx_destroy_image(vars->mlx, vars->idata.img);
 		vars->idata = newimg;
@@ -90,6 +79,7 @@ void	mlx(char *name, int **mat_arr)
 	
 	vars.mat_arr = mat_arr;
 	vars.qv = quater_normalize(quaternion_axis_angle(1, 1, 1, 30 * M_PI / 180));
+	vars.tmpqv = set_quater(1, 0, 0, 0);
 	printf("w:%.2f x:%.2f y:%.2f z:%.2f\n", vars.qv.w, vars.qv.x, vars.qv.y, vars.qv.z);
 
 	vars.set = set_trans(mat_arr);
