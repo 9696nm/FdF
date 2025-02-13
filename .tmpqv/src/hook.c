@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:57:17 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/01/30 12:57:22 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/13 21:38:27 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	mouse_release(int button, int x, int y, t_vars *vars)
 	{
 		vars->gflag.mouse_press = MOUSE_PRESS_OFF;
 		vars->qv = quater_multiply(vars->qv, vars->tmpqv);
-		vars->tmpqv = set_quater(1, 0, 0, 0);
+		vars->tmpqv = set_quat(1, 0, 0, 0);
 		vars->gflag.refresh = GLAPH_ON;
 	}
 	return (0);
@@ -67,16 +67,16 @@ int	key_press(int keycode, t_vars *vars)
 	if (keycode == XK_Escape)
 		window_destroy(vars);
 	if (keycode == XK_Up)
-		vars->set = reverse_quater(vars->qv, set_quater(0, 0, 1, 0), vars->set);
+		vars->set = reverse_quater(vars->qv, set_quat(0, 0, 1, 0), vars->set);
 	else if (keycode == XK_Down)
-		vars->set = reverse_quater(vars->qv, set_quater(0, 0, -1, 0), vars->set);
+		vars->set = reverse_quater(vars->qv, set_quat(0, 0, -1, 0), vars->set);
 	else if (keycode == XK_Left)
-		vars->set = reverse_quater(vars->qv, set_quater(0, 1, 0, 0), vars->set);
+		vars->set = reverse_quater(vars->qv, set_quat(0, 1, 0, 0), vars->set);
 	else if (keycode == XK_Right)
-		vars->set = reverse_quater(vars->qv, set_quater(0, -1, 0, 0), vars->set);
+		vars->set = reverse_quater(vars->qv, set_quat(0, -1, 0, 0), vars->set);
 	else if (keycode == XK_0)
 	{
-		vars->qv = set_quater(1, 1, 1, 1);
+		vars->qv = set_quat(1, 1, 1, 1);
 		vars->set = set_trans(vars->mat_arr);
 		vars->set.zoom = 20;
 	}

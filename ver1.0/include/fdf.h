@@ -22,30 +22,20 @@
 # include <X11/keysym.h>
 # include <X11/keysymdef.h>
 # include "mlx.h"
-// # include "mlx_int.h"
 
 # include "../libft/include/libft.h"
 # include "../libft/include/get_next_line.h"
+# include "q_rsqrt.h"
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
 
-# include <stdio.h> //!
-
 typedef enum e_displaysize
 {
 	WIDTH = 1920,
 	HEIGHT = 1080
-	// WIDTH = 1280,
-	// HEIGHT = 720
 }	t_dsize;
-
-// typedef struct s_displaysize
-// {
-// 	unsigned int	width;
-// 	unsigned int	height;
-// }	t_dsize;
 
 typedef struct s_imgdata
 {
@@ -100,7 +90,6 @@ typedef struct s_vars
 	t_dsize		dsize;
 	int			**mat_arr;
 	t_quater	qv;
-	t_quater	tmpqv;
 	t_tarns		set;
 	t_mcoord	mcrd;
 	t_gflag		gflag;
@@ -115,10 +104,11 @@ typedef struct s_coord
 
 // main
 void		mlx(char *name, int **array);
+void		double_free(int **array);
 
 // mlx unit
 void		my_mlx_pixel_put(t_idata *img, int x, int y, int color);
-void		put_line(t_idata *idata, t_coord q1, t_coord q2, int thickness);
+void		put_line(t_idata *idata, t_coord q1, t_coord q2);
 // t_dsize		displaysize_init(t_xvar *xvar);
 
 // hook

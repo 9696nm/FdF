@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:53:20 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/01/28 15:34:33 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/13 21:38:27 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void		mlx(char *name, int **array);
 
 // mlx unit
 void		my_mlx_pixel_put(t_idata *img, int x, int y, int color);
-void		put_line(t_idata *idata, t_coord q1, t_coord q2, int thickness);
+void		put_line(t_idata *idata, t_coord q1, t_coord q2);
 // t_dsize		displaysize_init(t_xvar *xvar);
 
 // hook
@@ -130,7 +130,7 @@ int			window_destroy(t_vars *vars);
 // other unit
 t_tarns		set_trans(int **mat_arr);
 t_coord		set_coord(int crd_x, int crd_y, int depth);
-t_quater	set_quater(float w, float x, float y, float z);
+t_quater	set_quat(float w, float x, float y, float z);
 t_tarns		reverse_quater(t_quater qv, t_quater p, t_tarns set);
 // t_quater	rotate_vector_mouse(t_vars *vars, int x, int y);
 
