@@ -39,7 +39,7 @@ LIBMLXA		=	$(MLX_DIR)/libmlx_Linux.a
 all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFTA) $(INCLUDE)
-	$(CC) -fsanitize=leak $(FLAGS) $(CFLAGS) $(OBJS) $(LIBFTA) $(LIBMLXA) -o $@ $(LIBX_FLAGS)
+	$(CC) $(FLAGS) $(CFLAGS) $(OBJS) $(LIBFTA) $(LIBMLXA) -o $@ $(LIBX_FLAGS)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
