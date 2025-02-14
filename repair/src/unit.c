@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:49:14 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/01/30 22:49:15 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/13 21:38:27 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_coord	set_coord(int crd_x, int crd_y, int depth)
 	return (crd);
 }
 
-t_quater	set_quater(float w, float x, float y, float z)
+t_quater	set_quat(float w, float x, float y, float z)
 {
 	t_quater	q;
 

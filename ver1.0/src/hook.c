@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:57:17 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/02/13 21:38:27 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/13 21:40:23 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,11 @@ int	mouse_move(int x, int y, t_vars *vars)
 	abs_xy = 1 / sqrtf(var_x * var_x + var_y * var_y);
 	if (isnan(abs_xy) || isinf(abs_xy))
 		abs_xy = 0;
-	vars->qv = quater_multiply(quater_normalize(quaternion_axis_angle(var_y * abs_xy, var_x * abs_xy, 0, M_PI / 100)), vars->qv);
-	t_quater test = quaternion_axis_angle(var_x * abs_xy, 0, 0, M_PI / 180);
-	printf("abs   a:%.2f x:%.2f y:%.2f\n", abs_xy, var_x, var_y);
-	printf("angle w:%.2f x:%.2f y:%.2f z%.2f\n", test.w, test.x, test.y, test.z);
-	test = quater_normalize(test);
-	printf("norm  w:%.2f x:%.2f y:%.2f z%.2f\n", test.w, test.x, test.y, test.z);
-	printf("res   w:%.2f x:%.2f y:%.2f z%.2f\n", vars->qv.w, vars->qv.x, vars->qv.y, vars->qv.z);
+	vars->qv = quater_multiply(quater_normalize(quaternion_axis_angle
+				(var_x * abs_xy, var_y * abs_xy, 0, M_PI / 100)), vars->qv);
 	vars->gflag.refresh = GLAPH_ON;
 	return (0);
 }
-
 
 int	mouse_release(int button, int x, int y, t_vars *vars)
 {
@@ -76,7 +70,8 @@ int	key_press(int keycode, t_vars *vars)
 		vars->set = reverse_quater(vars->qv, set_quat(0, -1, 0, 0), vars->set);
 	else if (keycode == XK_0)
 	{
-		vars->qv = quater_normalize(quaternion_axis_angle(1, 1, 1, -30 * M_PI / 180));
+		vars->qv = quater_normalize
+			(quaternion_axis_angle(1, 1, 1, -30 * M_PI / 180));
 		vars->set = set_trans(vars->mat_arr);
 		vars->set.zoom = 20;
 	}
@@ -91,6 +86,7 @@ int	window_destroy(t_vars *vars)
 	ft_putstr_fd("window close\n", STDOUT_FILENO);
 	mlx_destroy_image(vars->mlx, vars->idata.img);
 	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_display(vars->mlx);
 	exit(0);
 	return (0);
 }
