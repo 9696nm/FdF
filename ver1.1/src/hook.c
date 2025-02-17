@@ -73,7 +73,7 @@ int	key_press(int keycode, t_vars *vars)
 	{
 		vars->qv = quater_normalize
 			(quaternion_axis_angle(1, 1, 1, -30 * M_PI / 180));
-		vars->set = set_trans(vars->mat_arr);
+		vars->set = set_trans(vars->crdarr.arr);
 		vars->set.zoom = 20;
 	}
 	else

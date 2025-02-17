@@ -6,12 +6,14 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:53:20 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/02/17 12:27:33 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/17 16:40:05 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
+# include <stdio.h> //!!!!
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -81,13 +83,21 @@ typedef struct s_glaphic_flag
 	int	mouse_press;
 }	t_gflag;
 
+typedef struct s_coord_array
+{
+	int	**arr;
+	int	width;
+	int	length;
+}	t_crdarr;
+
 typedef struct s_vars
 {
 	void		*mlx;
 	void		*win;
 	t_idata		idata;
 	t_dsize		dsize;
-	int			**mat_arr;
+	// int			**mat_arr;
+	t_crdarr	crdarr;
 	t_quater	qv;
 	t_tarns		set;
 	t_mcoord	mcrd;
@@ -120,6 +130,7 @@ int			window_destroy(t_vars *vars);
 t_tarns		set_trans(int **mat_arr);
 t_coord		set_coord(int crd_x, int crd_y, int depth);
 t_quater	set_quat(float w, float x, float y, float z);
+t_crdarr	set_coord_array(int	**array);
 t_tarns		reverse_quater(t_quater qv, t_quater p, t_tarns set);
 // t_quater	rotate_vector_mouse(t_vars *vars, int x, int y);
 
