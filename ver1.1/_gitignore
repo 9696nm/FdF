@@ -13,9 +13,9 @@ test*.c
 
 *.out
 *.sh
-*.a
 *.gch
 
+maps
 obj
 checker
 

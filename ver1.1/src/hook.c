@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:57:17 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/02/13 21:40:23 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/17 12:29:58 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	mouse_move(int x, int y, t_vars *vars)
 	return (0);
 }
 
-int	mouse_release(int button, int x, int y, t_vars *vars)
+int	mouse_release(int button, int x __attribute__((unused)),
+	int y __attribute__((unused)), t_vars *vars)
 {
 	if (button == Button1)
 		vars->gflag.mouse_press = MOUSE_PRESS_OFF;
@@ -59,7 +60,7 @@ int	mouse_press(int button, int x, int y, t_vars *vars)
 int	key_press(int keycode, t_vars *vars)
 {
 	if (keycode == XK_Escape)
-		window_destroy(vars);
+		return (window_destroy(vars));
 	if (keycode == XK_Up)
 		vars->set = reverse_quater(vars->qv, set_quat(0, 0, 1, 0), vars->set);
 	else if (keycode == XK_Down)
@@ -72,7 +73,7 @@ int	key_press(int keycode, t_vars *vars)
 	{
 		vars->qv = quater_normalize
 			(quaternion_axis_angle(1, 1, 1, -30 * M_PI / 180));
-		vars->set = set_trans(vars->mat_arr);
+		vars->set = set_trans(vars->crdarr.arr);
 		vars->set.zoom = 20;
 	}
 	else
@@ -86,7 +87,5 @@ int	window_destroy(t_vars *vars)
 	ft_putstr_fd("window close\n", STDOUT_FILENO);
 	mlx_destroy_image(vars->mlx, vars->idata.img);
 	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	exit(0);
-	return (0);
+	return (mlx_loop_end(vars->mlx));
 }

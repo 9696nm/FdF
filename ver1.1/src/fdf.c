@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:19:43 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/02/13 21:36:35 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/17 16:21:36 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ static int	**assig_arr(int fd, int length, int width_size)
 	free(ret);
 	if (sp_arr == NULL)
 		return (NULL);
-	if (width_size == 0 || *sp_arr == width_size)
+	if (*sp_arr == 0)
+		ft_putstr_fd("No data found.\n", STDERR_FILENO);
+	else if (width_size == 0 || *sp_arr == width_size)
 		result = assig_arr(fd, length + 1, *sp_arr);
 	else
-		ft_putstr_fd("Found wrong line length. Exiting.\n", STDOUT_FILENO);
+		ft_putstr_fd("Found wrong line length. Exiting.\n", STDERR_FILENO);
 	if (result)
 		result[length] = sp_arr;
 	else
@@ -39,7 +41,7 @@ static int	**assig_arr(int fd, int length, int width_size)
 	return (result);
 }
 
-void	double_free(int **array)
+static void	double_free(int **array)
 {
 	int	**mem;
 
@@ -49,29 +51,35 @@ void	double_free(int **array)
 	free(array);
 }
 
+static int	err_turn(char *str)
+{
+	ft_putstr_fd(str, STDERR_FILENO);
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	int	fd;
 	int	**array;
 
 	if (argc != 2)
-	{
-		ft_putstr_fd("Usage : ./fdf <filename> [ case_size z_size ]\n",
-			STDERR_FILENO);
-		return (1);
-	}
+		return (err_turn("Usage : ./fdf <filename> [ case_size z_size ]\n"));
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
 		ft_putstr_fd("No file ", STDERR_FILENO);
 		ft_putstr_fd(argv[1], STDERR_FILENO);
-		ft_putchar_fd('\n', STDERR_FILENO);
-		return (1);
+		return (err_turn("\n"));
 	}
 	array = assig_arr(fd, 0, 0);
 	close(fd);
 	if (array == NULL)
-		return (0);
+		return (1);
+	if (array[0] == NULL)
+	{
+		free(array);
+		return (err_turn("No data found.\n"));
+	}
 	mlx(*argv, array);
 	double_free(array);
 	return (0);

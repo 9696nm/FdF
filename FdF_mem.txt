@@ -23,15 +23,17 @@ CG
 
 	4元数、クォータニオンについて
 		3b1b jp
-			https://www.youtube.com/watch?v=94NmanMgR9k&t=1052s /神
+			https://www.youtube.com/watch?v=94NmanMgR9k&t=1052s //すごい
 		Visualizing quaternions
 			https://eater.net/quaternions
+		オイラー角、回転行列から見るクォータニオン // 感謝
+			https://qiita.com/harmegiddo/items/96004f7c8eafbb8a45d0
 		CGのための数学
 			https://zenn.dev/mebiusbox/books/132b654aa02124/viewer
 		組込み技術者のための四元数（クォータニオン）入門
-			https://kumadasu.com/series/quaternion-for-embedded/
+			https://kumadasu.com/series/quaternion-for-embedded
 		クォータニオンと回転行列の関係
-			https://recruit.cct-inc.co.jp/tecblog/math/quaternions/
+			https://recruit.cct-inc.co.jp/tecblog/math/quaternions
 		Quaternionによる3次元の回転変換
 			https://qiita.com/kenjihiranabe/items/945232fbde58fab45681
 		回転ベクトル・回転行列・クォータニオン・オイラー角についてまとめてみた

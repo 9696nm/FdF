@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:58:22 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 16:22:59 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/17 12:21:05 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,19 @@ char	*get_next_line(int fd)
 	if (lst.result)
 		free(lst.result);
 	return (NULL);
+}
+
+__attribute__((destructor)) static void	global_free(void)
+{
+	int	fd;
+
+	fd = 0;
+	while (++fd <= FD_MAX)
+	{
+		if (g_memry[fd])
+			free(g_memry[fd]);
+		fd++;
+	}
 }
 
 // static int	memry_alloc(int fd, char *memry[])

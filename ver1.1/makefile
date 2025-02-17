@@ -6,15 +6,13 @@
 #    By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 15:14:11 by hana/hmori        #+#    #+#              #
-#    Updated: 2025/02/13 21:27:30 by hana/hmori       ###   ########.fr        #
+#    Updated: 2025/02/17 11:56:15 by hana/hmori       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	cc
 FLAGS		=	-I$(INC_DIR) -I$(MLX_DIR)
-CFLAGS		=
-# CFLAGS	 =	-Wall -Wextra -Werror
-# LIBX_FLAGS	=	-lmlx_Linux -lXext -lX11 -lm
+CFLAGS		=	-Wall -Wextra -Werror
 LIBX_FLAGS	=	-Imlx -lXext -lX11 -lm
 
 MAKEFLAGS	+=	--no-print-directory
@@ -25,7 +23,7 @@ INC_DIR		=	include
 INCLUDE		=	$(INC_DIR)/fdf.h
 
 SRC_DIR		=	src
-SRC_FILES	=	fdf.c graphic.c hook.c quaternion.c unit.c q_rsqrt.c
+SRC_FILES	=	fdf.c graphic.c hook.c quaternion.c unit.c
 
 OBJ_DIR 	=	obj
 OBJS 		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

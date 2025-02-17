@@ -6,35 +6,65 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:06:24 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/01/30 16:06:27 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/17 14:42:28 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/fdf.h"
 #include <string.h>
 
-void	test_free(char *test)
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void	test2(void *a)
 {
-	free(test);
-	test = NULL;
-	return ;
-	// printf("%s\n", *test);
+	free(a);
+}
+
+void	test(void *a)
+{
+	test2(a);
 }
 
 int	main()
 {
-	// char	*test;
-
-	// test = malloc(sizeof(char) * 2);
-	// *test = 'a';
-	// test_free(test);
-	// // free(test);
-	// test = NULL;
-	// // printf("%s\n", test);
-	// ft_printf("%s\n", test);
-	printf("%f\n", 1-0.5f);
+	test(malloc(1));
 	return (0);
 }
+
+// int main()
+// {
+// 	int		len = 50;
+// 	size_t	size = sizeof(t_coord) * 10;
+// 	clock_t	start_time;
+// 	clock_t	end_time;
+// 	double	elapsed_time;
+
+// 	printf("len: %d\n", len);
+
+// 	start_time = clock();
+// 	t_coord*	ptr = (t_coord *)malloc(size);
+// 	for (int i = 0; i < len; i++)
+// 	{
+// 		ptr[i].crd_x = 100000;
+// 		ptr[i].crd_y = 100000;
+// 		ptr[i].depth = 100000;
+// 	}
+// 	free(ptr);
+// 	end_time = clock();
+// 	elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+// 	printf("file size (byte): %zu\n", size);
+// 	printf("Time taken for malloc: %f seconds\n", elapsed_time);
+	
+// 	start_time = clock();
+// 	for (int i = 0; i < len; i++)
+// 		quater_rotate(set_quat(5, 5, 5, 5), set_quat(5, 5, 5, 5));
+// 	end_time = clock();
+// 	elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+// 	printf("Time taken for malloc: %f seconds\n", elapsed_time);
+// 	return (0);
+// }
 
 // int	main()
 // {
