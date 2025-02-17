@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:49:14 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/02/13 21:38:27 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/17 16:40:05 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,20 @@ t_quater	set_quat(float w, float x, float y, float z)
 	q.y = y;
 	q.z = z;
 	return (q);
+}
+
+t_crdarr	set_coord_array(int	**array)
+{
+	int	i;
+	t_crdarr	crdarr;
+	
+	crdarr.arr = array;
+	crdarr.width = array[0][0];
+	i = 0;
+	while (array[i])
+		i++;
+	crdarr.width = i;
+	return (crdarr);
 }
 
 t_tarns	reverse_quater(t_quater qv, t_quater p, t_tarns set)

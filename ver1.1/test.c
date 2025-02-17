@@ -17,38 +17,54 @@
 #include <stdlib.h>
 #include <time.h>
 
-int main()
+void	test2(void *a)
 {
-	int		len = 50;
-	size_t	size = sizeof(t_coord) * 10;
-	clock_t	start_time;
-	clock_t	end_time;
-	double	elapsed_time;
+	free(a);
+}
 
-	printf("len: %d\n", len);
+void	test(void *a)
+{
+	test2(a);
+}
 
-	start_time = clock();
-	t_coord*	ptr = (t_coord *)malloc(size);
-	for (int i = 0; i < len; i++)
-	{
-		ptr[i].crd_x = 100000;
-		ptr[i].crd_y = 100000;
-		ptr[i].depth = 100000;
-	}
-	free(ptr);
-	end_time = clock();
-	elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-	printf("file size (byte): %zu\n", size);
-	printf("Time taken for malloc: %f seconds\n", elapsed_time);
-	
-	start_time = clock();
-	for (int i = 0; i < len; i++)
-		quater_rotate(set_quat(5, 5, 5, 5), set_quat(5, 5, 5, 5));
-	end_time = clock();
-	elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-	printf("Time taken for malloc: %f seconds\n", elapsed_time);
+int	main()
+{
+	test(malloc(1));
 	return (0);
 }
+
+// int main()
+// {
+// 	int		len = 50;
+// 	size_t	size = sizeof(t_coord) * 10;
+// 	clock_t	start_time;
+// 	clock_t	end_time;
+// 	double	elapsed_time;
+
+// 	printf("len: %d\n", len);
+
+// 	start_time = clock();
+// 	t_coord*	ptr = (t_coord *)malloc(size);
+// 	for (int i = 0; i < len; i++)
+// 	{
+// 		ptr[i].crd_x = 100000;
+// 		ptr[i].crd_y = 100000;
+// 		ptr[i].depth = 100000;
+// 	}
+// 	free(ptr);
+// 	end_time = clock();
+// 	elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+// 	printf("file size (byte): %zu\n", size);
+// 	printf("Time taken for malloc: %f seconds\n", elapsed_time);
+	
+// 	start_time = clock();
+// 	for (int i = 0; i < len; i++)
+// 		quater_rotate(set_quat(5, 5, 5, 5), set_quat(5, 5, 5, 5));
+// 	end_time = clock();
+// 	elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+// 	printf("Time taken for malloc: %f seconds\n", elapsed_time);
+// 	return (0);
+// }
 
 // int	main()
 // {

@@ -6,11 +6,12 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:32:12 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/02/17 12:29:09 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/17 16:42:56 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
+// #include "fdf.h"
 
 void	my_mlx_pixel_put(t_idata *img, int x, int y, int color)
 {
@@ -43,39 +44,43 @@ void	put_line(t_idata *idata, t_coord q1, t_coord q2)
 	}
 }
 
-static t_quater	render_len(int mx, int my, t_idata *newimg, t_vars *vars)
+static int	render_len(int my, t_quater *pr_len, t_idata *newimg, t_vars *var)
 {
+	int			mx;
 	t_quater	q;
-	t_quater	next;
+	t_quater	pr_crd;
 
-	q = quater_rotate(vars->qv,
-			quaternion_axis_angle(mx - vars->set.x, my - vars->set.y,
-				(vars->set.z - vars->mat_arr[my][mx + 1]) * 0.1, M_PI));
-	if (mx + 1 < vars->mat_arr[my][0])
+	if (pr_len == NULL)
+		return (1);
+	mx = 0;
+	while (mx < var->crdarr.width)
 	{
-		next = render_len(mx + 1, my, newimg, vars);
-		put_line(newimg, set_coord(q.x * vars->set.zoom + WIDTH / 2,
-				q.y * vars->set.zoom + HEIGHT / 2, q.z),
-			set_coord(next.x * vars->set.zoom + WIDTH / 2,
-				next.y * vars->set.zoom + HEIGHT / 2, next.z));
+		q = quater_rotate(var->qv,
+				quaternion_axis_angle(mx - var->set.x, my - var->set.y,
+					(var->set.z - var->crdarr.arr[my][mx + 1]) * 0.1, M_PI));
+		if (mx)
+			put_line(newimg, set_coord(pr_crd.x * var->set.zoom + WIDTH / 2,
+					pr_crd.y * var->set.zoom + HEIGHT / 2, pr_crd.z),
+				set_coord(q.x * var->set.zoom + WIDTH / 2,
+					q.y * var->set.zoom + HEIGHT / 2, q.z));
+		if (my)
+			put_line(newimg, set_coord(pr_len[mx].x * var->set.zoom + WIDTH / 2,
+					pr_len[mx].y * var->set.zoom + HEIGHT / 2, pr_len[mx].z),
+				set_coord(q.x * var->set.zoom + WIDTH / 2,
+					q.y * var->set.zoom + HEIGHT / 2, q.z));
+		pr_crd = q;
+		pr_len[mx++] = q;
 	}
-	if (vars->mat_arr[my + 1])
-	{
-		next = quater_rotate(vars->qv, quaternion_axis_angle(mx - vars->set.x,
-					my + 1 - vars->set.y,
-					(vars->set.z - vars->mat_arr[my + 1][mx + 1]) * 0.1, M_PI));
-		put_line(newimg, set_coord(q.x * vars->set.zoom + WIDTH / 2,
-				q.y * vars->set.zoom + HEIGHT / 2, q.z),
-			set_coord(next.x * vars->set.zoom + WIDTH / 2,
-				next.y * vars->set.zoom + HEIGHT / 2, next.z));
-	}
-	return (q);
+	if (my + 1 < var->crdarr.length)
+		render_len(my + 1, pr_len, newimg, var);
+	else
+		free(pr_len);
+	return(0);
 }
 
 static int	render_frame(t_vars *vars)
 {
-	int			len;
-	t_idata		newimg;
+	t_idata	newimg;
 
 	if (vars->gflag.refresh == GLAPH_ON)
 	{
@@ -83,9 +88,9 @@ static int	render_frame(t_vars *vars)
 		newimg.img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 		newimg.addr = mlx_get_data_addr(newimg.img, &newimg.bits_per_pixel,
 				&newimg.size_line, &newimg.endian);
-		len = 0;
-		while (vars->mat_arr[len])
-			render_len(0, len++, &newimg, vars);
+
+		render_len(0, malloc(sizeof(t_quater) * vars->crdarr.width), &newimg, vars);
+
 		mlx_put_image_to_window(vars->mlx, vars->win, newimg.img, 0, 0);
 		mlx_destroy_image(vars->mlx, vars->idata.img);
 		vars->idata = newimg;
@@ -93,11 +98,62 @@ static int	render_frame(t_vars *vars)
 	return (0);
 }
 
+// static t_quater	render_len(int mx, int my, t_idata *newimg, t_vars *vars)
+// {
+// 	t_quater	q;
+// 	t_quater	next;
+
+// 	q = quater_rotate(vars->qv,
+// 			quaternion_axis_angle(mx - vars->set.x, my - vars->set.y,
+// 				(vars->set.z - vars->mat_arr[my][mx + 1]) * 0.1, M_PI));
+// 	if (mx + 1 < vars->mat_arr[my][0])
+// 	{
+// 		next = render_len(mx + 1, my, newimg, vars);
+// 		put_line(newimg, set_coord(q.x * vars->set.zoom + WIDTH / 2,
+// 				q.y * vars->set.zoom + HEIGHT / 2, q.z),
+// 			set_coord(next.x * vars->set.zoom + WIDTH / 2,
+// 				next.y * vars->set.zoom + HEIGHT / 2, next.z));
+// 	}
+// 	if (vars->mat_arr[my + 1])
+// 	{
+// 		next = quater_rotate(vars->qv, quaternion_axis_angle(mx - vars->set.x,
+// 					my + 1 - vars->set.y,
+// 					(vars->set.z - vars->mat_arr[my + 1][mx + 1]) * 0.1, M_PI));
+// 		put_line(newimg, set_coord(q.x * vars->set.zoom + WIDTH / 2,
+// 				q.y * vars->set.zoom + HEIGHT / 2, q.z),
+// 			set_coord(next.x * vars->set.zoom + WIDTH / 2,
+// 				next.y * vars->set.zoom + HEIGHT / 2, next.z));
+// 	}
+// 	return (q);
+// }
+
+// static int	render_frame(t_vars *vars)
+// {
+// 	int			len;
+// 	t_idata		newimg;
+
+// 	if (vars->gflag.refresh == GLAPH_ON)
+// 	{
+// 		vars->gflag.refresh = GLAPH_OFF;
+// 		newimg.img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
+// 		newimg.addr = mlx_get_data_addr(newimg.img, &newimg.bits_per_pixel,
+// 				&newimg.size_line, &newimg.endian);
+// 		len = 0;
+// 		while (vars->mat_arr[len])
+// 			render_len(0, len++, &newimg, vars);
+// 		mlx_put_image_to_window(vars->mlx, vars->win, newimg.img, 0, 0);
+// 		mlx_destroy_image(vars->mlx, vars->idata.img);
+// 		vars->idata = newimg;
+// 	}
+// 	return (0);
+// }
+
 void	mlx(char *name, int **mat_arr)
 {
 	t_vars	vars;
 
-	vars.mat_arr = mat_arr;
+	vars.crdarr = set_coord_array(mat_arr);
+	// vars.mat_arr = mat_arr;
 	vars.qv = quater_normalize(quaternion_axis_angle
 			(1, 1, 1, -30 * M_PI / 180));
 	vars.set = set_trans(mat_arr);

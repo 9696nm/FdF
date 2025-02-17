@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:57:13 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/02/13 21:40:39 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/17 16:16:53 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_quater	quater_normalize(t_quater q)
 	return (q);
 }
 
-// product of quaternions
+// Product of quaternions
 t_quater	quater_multiply(t_quater q1, t_quater q2)
 {
 	t_quater	result;
