@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-// #include "fdf.h"
+#include "fdf.h"
 
 int	mouse_move(int x, int y, t_vars *vars)
 {
@@ -90,6 +89,5 @@ int	window_destroy(t_vars *vars)
 {
 	ft_putstr_fd("window close\n", STDOUT_FILENO);
 	mlx_destroy_image(vars->mlx, vars->idata.img);
-	mlx_destroy_window(vars->mlx, vars->win);
 	return (mlx_loop_end(vars->mlx));
 }

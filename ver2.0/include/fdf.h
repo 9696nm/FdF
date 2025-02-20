@@ -115,7 +115,6 @@ typedef struct s_vars
 	void		*win;
 	t_idata		idata;
 	t_dsize		dsize;
-	// int		**mat_arr;
 	t_varr		varr;
 	t_quater	qv;
 	t_quater	rqv;
@@ -131,11 +130,6 @@ void		mlx(char *name, int **array);
 // graphic unit
 int			render_frame(t_vars *vars);
 void		parameter_init(t_vars *vars);
-// void		put_line(t_idata *idata, t_vec3 q1, t_vec3 q2);
-
-// mlx unit
-// void		my_mlx_pixel_put(t_idata *img, int x, int y, int color);
-// t_dsize	displaysize_init(t_xvar *xvar);
 
 // hook
 int			mouse_move(int x, int y, t_vars *vars);
@@ -150,8 +144,6 @@ t_arrof		arr_off_init(int **mat_arr);
 t_quater	arr_off_set(int mx, int my, int mz, t_arrof arrof);
 t_arrof		crd_off_move(t_quater rqv, t_arrof set, t_vec3 move);
 t_vec3		crd_off_set(t_vec3 v, t_param param);
-t_quater	quat_set(float w, float x, float y, float z);
-// t_quater	rotate_vector_mouse(t_vars *vars, int x, int y);
 
 // quaternion action
 t_quater	quater_normalize(t_quater q);

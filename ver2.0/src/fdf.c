@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-// #include "fdf.h"
+#include "fdf.h"
 
 static int	**assig_arr(int fd, int length, int width_size)
 {
@@ -47,7 +46,6 @@ void	mlx(char *name, int **mat_arr)
 	t_vars	vars;
 
 	vars.varr = crdarr_init(mat_arr);
-	// vars.mat_arr = mat_arr;
 	parameter_init(&vars);
 	vars.arrof = arr_off_init(vars.varr.arr);
 	vars.mlx = mlx_init();
@@ -57,13 +55,14 @@ void	mlx(char *name, int **mat_arr)
 			&vars.idata.bits_per_pixel,
 			&vars.idata.size_line, &vars.idata.endian);
 	mlx_hook(vars.win, KeyPress, KeyPressMask, key_press, &vars);
-	mlx_hook(vars.win, DestroyNotify, SubstructureNotifyMask, window_destroy,
-		&vars);
 	mlx_hook(vars.win, ButtonPress, ButtonPressMask, mouse_press, &vars);
 	mlx_hook(vars.win, ButtonRelease, ButtonReleaseMask, mouse_release, &vars);
 	mlx_hook(vars.win, MotionNotify, PointerMotionMask, mouse_move, &vars);
+	mlx_hook(vars.win, DestroyNotify, StructureNotifyMask,
+		window_destroy, &vars);
 	mlx_loop_hook(vars.mlx, render_frame, &vars);
 	mlx_loop(vars.mlx);
+	mlx_destroy_window(vars.mlx, vars.win);
 	mlx_destroy_display(vars.mlx);
 	free(vars.mlx);
 }

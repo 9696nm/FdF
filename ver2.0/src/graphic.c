@@ -10,8 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-// #include "fdf.h"
+#include "fdf.h"
+
+void	parameter_init(t_vars *vars)
+{
+	vars->rqv = quater_normalize(quater_axis_angle
+			(DEF_VIEW_X, DEF_VIEW_Y, DEF_VIEW_Z, DEF_VIEW_AXIS * M_PI / 180));
+	vars->qv = vars->rqv;
+	vars->arrof = arr_off_init(vars->varr.arr);
+	vars->param.zoom = DEF_ZOOM;
+	vars->gflag.fl = (1 << RE_GRAPHIC) | (0 << MOUSE_PRESS);
+}
 
 static void	my_mlx_pixel_put(t_idata *img, int x, int y, int color)
 {
@@ -23,7 +32,6 @@ static void	my_mlx_pixel_put(t_idata *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// bresenham line
 static void	put_line(t_idata *idata, t_vec3 q1, t_vec3 q2)
 {
 	int		steps;
@@ -74,9 +82,6 @@ static int	render_len(int my, t_quater *pr_len, t_idata *newimg, t_vars *vars)
 	return (0);
 }
 
-		// t_vec3 test = crd_off_set(q.v, vars->param);
-		// my_mlx_pixel_put(newimg, test.x, test.y, 0xFFFFFFFF);
-
 int	render_frame(t_vars *vars)
 {
 	t_idata	newimg;
@@ -95,113 +100,3 @@ int	render_frame(t_vars *vars)
 	}
 	return (0);
 }
-
-void	parameter_init(t_vars *vars)
-{
-	vars->rqv = quater_normalize(quater_axis_angle
-			(DEF_VIEW_X, DEF_VIEW_Y, DEF_VIEW_Z, DEF_VIEW_AXIS * M_PI / 180));
-	vars->qv = vars->rqv;
-	vars->arrof = arr_off_init(vars->varr.arr);
-	vars->param.zoom = DEF_ZOOM;
-	vars->gflag.fl = (1 << RE_GRAPHIC) | (0 << MOUSE_PRESS);
-}
-
-// #include <time.h>
-
-// static int	render_frame(t_vars *vars)
-// {
-// 	t_idata	newimg;
-
-// 	clock_t	start_time;
-// 	clock_t	end_time;
-
-// 	if (vars->gflag.refresh == GLAPH_ON)
-// 	{
-// 		vars->gflag.refresh = GLAPH_OFF;
-// 		newimg.img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
-// 		newimg.addr = mlx_get_data_addr(newimg.img, &newimg.bits_per_pixel,
-// 				&newimg.size_line, &newimg.endian);
-
-// 		start_time = clock();
-// 		render_len(0, malloc(sizeof(t_quater) * vars->varr.width), &newimg, vars);
-// 		end_time = clock();
-// 		printf("Time taken for malloc: %f seconds\n", (double)(end_time - start_time) / CLOCKS_PER_SEC);
-
-// 		mlx_put_image_to_window(vars->mlx, vars->win, newimg.img, 0, 0);
-// 		mlx_destroy_image(vars->mlx, vars->idata.img);
-// 		vars->idata = newimg;
-// 	}
-// 	return (0);
-// }
-
-
-
-// static t_coord	set_coord(int x, int y, int z)
-// {
-// 	t_coord	crd;
-
-// 	crd.x = x;
-// 	crd.y = y;
-// 	crd.z = z;
-// 	return (crd);
-// }
-
-// static t_quater	render_len(int mx, int my, t_idata *newimg, t_vars *vars)
-// {
-// 	t_quater	q;
-// 	t_quater	next;
-
-// 	q = quater_rotate(vars->qv,
-// 			quater_axis_angle(mx - vars->set.x, my - vars->set.y,
-// 				(vars->set.z - vars->mat_arr[my][mx + 1]) * 0.1, M_PI));
-// 	if (mx + 1 < vars->mat_arr[my][0])
-// 	{
-// 		next = render_len(mx + 1, my, newimg, vars);
-// 		put_line(newimg, set_coord(q.x * vars->set.zoom + WIDTH / 2,
-// 				q.y * vars->set.zoom + HEIGHT / 2, q.z),
-// 			set_coord(next.x * vars->set.zoom + WIDTH / 2,
-// 				next.y * vars->set.zoom + HEIGHT / 2, next.z));
-// 	}
-// 	if (vars->mat_arr[my + 1])
-// 	{
-// 		next = quater_rotate(vars->qv, quater_axis_angle(mx - vars->set.x,
-// 					my + 1 - vars->set.y,
-// 					(vars->set.z - vars->mat_arr[my + 1][mx + 1]) * 0.1, M_PI));
-// 		put_line(newimg, set_coord(q.x * vars->set.zoom + WIDTH / 2,
-// 				q.y * vars->set.zoom + HEIGHT / 2, q.z),
-// 			set_coord(next.x * vars->set.zoom + WIDTH / 2,
-// 				next.y * vars->set.zoom + HEIGHT / 2, next.z));
-// 	}
-// 	return (q);
-// }
-
-// #include <time.h>
-
-// static int	render_frame(t_vars *vars)
-// {
-// 	int			len;
-// 	t_idata		newimg;
-
-// 	clock_t	start_time;
-// 	clock_t	end_time;
-
-// 	if (vars->gflag.refresh == GLAPH_ON)
-// 	{
-// 		vars->gflag.refresh = GLAPH_OFF;
-// 		newimg.img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
-// 		newimg.addr = mlx_get_data_addr(newimg.img, &newimg.bits_per_pixel,
-// 				&newimg.size_line, &newimg.endian);
-
-// 		start_time = clock();
-// 		len = 0;
-// 		while (vars->mat_arr[len])
-// 			render_len(0, len++, &newimg, vars);
-// 		end_time = clock();
-// 		printf("Time taken for malloc: %f seconds\n", (double)(end_time - start_time) / CLOCKS_PER_SEC);
-
-// 		mlx_put_image_to_window(vars->mlx, vars->win, newimg.img, 0, 0);
-// 		mlx_destroy_image(vars->mlx, vars->idata.img);
-// 		vars->idata = newimg;
-// 	}
-// 	return (0);
-// }
