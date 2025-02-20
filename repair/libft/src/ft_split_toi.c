@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:22:29 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/01/29 14:17:17 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/13 21:54:26 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	section_count(char *str, char c)
 
 	section_len = 0;
 	while (str && *str)
+	{
 		if (*str == c)
 			str++;
 		else
@@ -25,6 +26,7 @@ static int	section_count(char *str, char c)
 			section_len++;
 			str = ft_strchr(str, c);
 		}
+	}
 	return (section_len);
 }
 

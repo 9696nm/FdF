@@ -12,8 +12,7 @@
 
 CC			=	cc
 FLAGS		=	-I$(INC_DIR) -I$(MLX_DIR)
-CFLAGS		=	
-# CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror
 LIBX_FLAGS	=	-Imlx -lXext -lX11 -lm
 
 MAKEFLAGS	+=	--no-print-directory

@@ -18,6 +18,7 @@ static int	section_count(char *str, char c)
 
 	section_len = 0;
 	while (str && *str)
+	{
 		if (*str == c)
 			str++;
 		else
@@ -25,6 +26,7 @@ static int	section_count(char *str, char c)
 			section_len++;
 			str = ft_strchr(str, c);
 		}
+	}
 	return (section_len);
 }
 

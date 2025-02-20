@@ -15,8 +15,8 @@ MiniLibXとはなんぞや
 	
 CG
 	プレゼンハム近似
-
-	https://web.wakayama-u.ac.jp/~tokoi/lecture/cg/cgnote03.pdf //線の書き方
+		https://qiita.com/shinsa82/items/fc890aff12ed2a200e52
+		https://sioramen.sub.jp/algorithm-bresenham/bresenham.html
 
 	複素数の回転
 		https://kosenejuku.com/1540/
@@ -28,14 +28,14 @@ CG
 			https://eater.net/quaternions
 		オイラー角、回転行列から見るクォータニオン // 感謝
 			https://qiita.com/harmegiddo/items/96004f7c8eafbb8a45d0
+		Quaternionによる3次元の回転変換
+			https://qiita.com/kenjihiranabe/items/945232fbde58fab45681
 		CGのための数学
 			https://zenn.dev/mebiusbox/books/132b654aa02124/viewer
 		組込み技術者のための四元数（クォータニオン）入門
 			https://kumadasu.com/series/quaternion-for-embedded
 		クォータニオンと回転行列の関係
 			https://recruit.cct-inc.co.jp/tecblog/math/quaternions
-		Quaternionによる3次元の回転変換
-			https://qiita.com/kenjihiranabe/items/945232fbde58fab45681
 		回転ベクトル・回転行列・クォータニオン・オイラー角についてまとめてみた
 			https://kamino.hatenablog.com/entry/rotation_expressions
 

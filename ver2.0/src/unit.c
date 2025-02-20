@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-// #include "fdf.h"
+#include "fdf.h"
 
 t_varr	crdarr_init(int **array)
 {
@@ -81,11 +80,3 @@ t_vec3	crd_off_set(t_vec3 v, t_param param)
 	crd.z = v.z;
 	return (crd);
 }
-
-// t_dsize	displaysize_init(t_xvar *xvar)
-// {
-// 	t_dsize	dsize;
-
-// 	dsize.width = XDisplayWidth(xvar->display, xvar->screen);
-// 	dsize.height = XDisplayHeight(xvar->display, xvar->screen);
-// }

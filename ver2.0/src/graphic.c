@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-// #include "fdf.h"
+#include "fdf.h"
 
 void	parameter_init(t_vars *vars)
 {
@@ -33,7 +32,6 @@ static void	my_mlx_pixel_put(t_idata *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// bresenham line
 static void	put_line(t_idata *idata, t_vec3 q1, t_vec3 q2)
 {
 	int		steps;
@@ -84,9 +82,6 @@ static int	render_len(int my, t_quater *pr_len, t_idata *newimg, t_vars *vars)
 	return (0);
 }
 
-		// t_vec3 test = crd_off_set(q.v, vars->param);
-		// my_mlx_pixel_put(newimg, test.x, test.y, 0xFFFFFFFF);
-
 int	render_frame(t_vars *vars)
 {
 	t_idata	newimg;
@@ -105,89 +100,3 @@ int	render_frame(t_vars *vars)
 	}
 	return (0);
 }
-
-
-// #include <time.h>
-// #include <stdio.h>
-
-// int	render_frame(t_vars *vars)
-// {
-// 	t_idata	newimg;
-
-// 	clock_t	start_time;
-// 	clock_t	end_time;
-
-// 	if (vars->gflag.fl & (1 << RE_GRAPHIC))
-// 	{
-// 		vars->gflag.fl &= ~(1 << RE_GRAPHIC);
-// 		newimg.img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
-// 		newimg.addr = mlx_get_data_addr(newimg.img, &newimg.bits_per_pixel,
-// 				&newimg.size_line, &newimg.endian);
-
-// 		start_time = clock();
-// 		render_len(0, malloc(sizeof(t_quater) * vars->varr.width), &newimg, vars);
-// 		end_time = clock();
-// 		printf("Time taken for malloc: %f seconds\n", (double)(end_time - start_time) / CLOCKS_PER_SEC);
-
-// 		mlx_put_image_to_window(vars->mlx, vars->win, newimg.img, 0, 0);
-// 		mlx_destroy_image(vars->mlx, vars->idata.img);
-// 		vars->idata = newimg;
-// 	}
-// 	return (0);
-// }
-
-
-// static t_quater	render_len(int mx, int my, t_idata *newimg, t_vars *vars)
-// {
-// 	t_quater	q;
-// 	t_quater	next;
-
-// 	q = quater_rotate(vars->rqv,
-// 			arr_off_set(mx, my, vars->varr.arr[my][mx + 1], vars->arrof));
-// 	if (mx + 1 < vars->varr.arr[my][0])
-// 	{
-// 		next = render_len(mx + 1, my, newimg, vars);
-// 		put_line(newimg, crd_off_set(next.v, vars->param),
-// 			crd_off_set(q.v, vars->param));
-// 	}
-// 	if (vars->varr.arr[my + 1])
-// 	{
-// 		next = quater_rotate(vars->rqv,
-// 			arr_off_set(mx, my + 1, vars->varr.arr[my + 1][mx + 1], vars->arrof));
-// 		put_line(newimg, crd_off_set(next.v, vars->param),
-// 			crd_off_set(q.v, vars->param));
-// 	}
-// 	return (q);
-// }
-
-// #include <time.h>
-// #include <stdio.h>
-
-// int	render_frame(t_vars *vars)
-// {
-// 	int			len;
-// 	t_idata		newimg;
-
-// 	clock_t	start_time;
-// 	clock_t	end_time;
-
-// 	if (vars->gflag.fl & (1 << RE_GRAPHIC))
-// 	{
-// 		vars->gflag.fl &= ~(1 << RE_GRAPHIC);
-// 		newimg.img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
-// 		newimg.addr = mlx_get_data_addr(newimg.img, &newimg.bits_per_pixel,
-// 				&newimg.size_line, &newimg.endian);
-
-// 		start_time = clock();
-// 		len = 0;
-// 		while (vars->varr.arr[len])
-// 			render_len(0, len++, &newimg, vars);
-// 		end_time = clock();
-// 		printf("Time taken for malloc: %f seconds\n", (double)(end_time - start_time) / CLOCKS_PER_SEC);
-
-// 		mlx_put_image_to_window(vars->mlx, vars->win, newimg.img, 0, 0);
-// 		mlx_destroy_image(vars->mlx, vars->idata.img);
-// 		vars->idata = newimg;
-// 	}
-// 	return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:53:20 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/02/20 20:06:01 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/13 21:38:27 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <X11/keysym.h>
 # include <X11/keysymdef.h>
 # include "mlx.h"
+// # include "mlx_int.h"
 
-# include "q_rsqrt.h"
 # include "../libft/include/libft.h"
 # include "../libft/include/get_next_line.h"
 
@@ -31,30 +31,21 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define MOUSE_SENSITIVITY 0.005
-# define WHEEL_SPPED 2
-# define Z_ELASTICITY 0.1
+# include <stdio.h> //!
 
 typedef enum e_displaysize
 {
 	WIDTH = 1920,
 	HEIGHT = 1080
+	// WIDTH = 1280,
+	// HEIGHT = 720
 }	t_dsize;
 
-typedef enum e_glaphic_flag_name
-{
-	RE_GRAPHIC,
-	MOUSE_PRESS
-}	t_gfname;
-
-typedef enum e_defalt_value
-{
-	DEF_ZOOM = 20,
-	DEF_VIEW_X = 1,
-	DEF_VIEW_Y = 1,
-	DEF_VIEW_Z = 1,
-	DEF_VIEW_AXIS = -30
-}	t_defval;
+// typedef struct s_displaysize
+// {
+// 	unsigned int	width;
+// 	unsigned int	height;
+// }	t_dsize;
 
 typedef struct s_imgdata
 {
@@ -65,49 +56,41 @@ typedef struct s_imgdata
 	int		endian;
 }	t_idata;
 
-typedef struct s_vecter3
-{
-	float	x;
-	float	y;
-	float	z;
-}	t_vec3;
-
 typedef struct s_quaternion
 {
-	float	w;
-	t_vec3	v;
+	double	w;
+	double	x;
+	double	y;
+	double	z;
 }	t_quater;
 
-typedef struct s_array_offset
+typedef struct s_translation
 {
 	float	x;
 	float	y;
 	float	z;
-	float	z_elast;
-}	t_arrof;
-
-typedef struct s_parameter
-{
-	int		zoom;
-}	t_param;
+	float	zoom;
+}	t_tarns;
 
 typedef struct s_mouse_coord
 {
 	int	press_x;
 	int	press_y;
-}	t_mcrd;
+}	t_mcoord;
+
+typedef enum e_glaphic_flag_name
+{
+	GLAPH_ON = 1,
+	GLAPH_OFF = 0,
+	MOUSE_PRESS_ON = 1,
+	MOUSE_PRESS_OFF = 0
+}	t_gfname;
 
 typedef struct s_glaphic_flag
 {
-	uint8_t	fl;
+	int	refresh;
+	int	mouse_press;
 }	t_gflag;
-
-typedef struct s_vecter_array
-{
-	int	**arr;
-	int	width;
-	int	length;
-}	t_varr;
 
 typedef struct s_vars
 {
@@ -115,27 +98,27 @@ typedef struct s_vars
 	void		*win;
 	t_idata		idata;
 	t_dsize		dsize;
-	// int		**mat_arr;
-	t_varr		varr;
+	int			**mat_arr;
 	t_quater	qv;
-	t_quater	rqv;
-	t_arrof		arrof;
-	t_mcrd		mcrd;
-	t_param		param;
+	t_tarns		set;
+	t_mcoord	mcrd;
 	t_gflag		gflag;
 }	t_vars;
+
+typedef struct s_coord
+{
+	float	crd_x;
+	float	crd_y;
+	float	depth;
+}	t_coord;
 
 // main
 void		mlx(char *name, int **array);
 
-// graphic unit
-int			render_frame(t_vars *vars);
-void		parameter_init(t_vars *vars);
-// void		put_line(t_idata *idata, t_vec3 q1, t_vec3 q2);
-
 // mlx unit
-// void		my_mlx_pixel_put(t_idata *img, int x, int y, int color);
-// t_dsize	displaysize_init(t_xvar *xvar);
+void		my_mlx_pixel_put(t_idata *img, int x, int y, int color);
+void		put_line(t_idata *idata, t_coord q1, t_coord q2);
+// t_dsize		displaysize_init(t_xvar *xvar);
 
 // hook
 int			mouse_move(int x, int y, t_vars *vars);
@@ -145,12 +128,10 @@ int			key_press(int keycode, t_vars *vars);
 int			window_destroy(t_vars *vars);
 
 // other unit
-t_varr		crdarr_init(int **array);
-t_arrof		arr_off_init(int **mat_arr);
-t_quater	arr_off_set(int mx, int my, int mz, t_arrof arrof);
-t_arrof		crd_off_move(t_quater rqv, t_arrof set, t_vec3 move);
-t_vec3		crd_off_set(t_vec3 v, t_param param);
-t_quater	quat_set(float w, float x, float y, float z);
+t_tarns		set_trans(int **mat_arr);
+t_coord		set_coord(int crd_x, int crd_y, int depth);
+t_quater	set_quat(float w, float x, float y, float z);
+t_tarns		reverse_quater(t_quater qv, t_quater p, t_tarns set);
 // t_quater	rotate_vector_mouse(t_vars *vars, int x, int y);
 
 // quaternion action
@@ -158,6 +139,6 @@ t_quater	quater_normalize(t_quater q);
 t_quater	quater_multiply(t_quater q1, t_quater q2);
 t_quater	quater_conjugate(t_quater q);
 t_quater	quater_rotate(t_quater qv, t_quater q);
-t_quater	quater_axis_angle(float x, float y, float z, float angle);
+t_quater	quaternion_axis_angle(float x, float y, float z, float angle);
 
 #endif
