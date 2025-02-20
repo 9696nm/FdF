@@ -12,16 +12,6 @@
 
 #include "fdf.h"
 
-void	parameter_init(t_vars *vars)
-{
-	vars->rqv = quater_normalize(quater_axis_angle
-			(DEF_VIEW_X, DEF_VIEW_Y, DEF_VIEW_Z, DEF_VIEW_AXIS * M_PI / 180));
-	vars->qv = vars->rqv;
-	vars->arrof = arr_off_init(vars->varr.arr);
-	vars->param.zoom = DEF_ZOOM;
-	vars->gflag.fl = (1 << RE_GRAPHIC) | (0 << MOUSE_PRESS);
-}
-
 static void	my_mlx_pixel_put(t_idata *img, int x, int y, int color)
 {
 	char	*dst;
@@ -53,6 +43,22 @@ static void	put_line(t_idata *idata, t_vec3 q1, t_vec3 q2)
 	}
 }
 
+static t_quater	apply_projection(int mx, int my, t_vars *vars)
+{
+	float		scale;
+	t_quater	q;
+
+	q = quater_rotate(vars->rqv,
+			arr_off_set(mx, my, vars->varr.arr[my][mx + 1], vars->arrof));
+	if (vars->gflag.fl & (1 << TOGGLE_PERSPECTIVE))
+	{
+		scale = 1.0f / (1.0f + PERSP_FACTER * q.v.z);
+		q.v.x *= scale;
+		q.v.y *= scale;
+	}
+	return (q);
+}
+
 static int	render_len(int my, t_quater *pr_len, t_idata *newimg, t_vars *vars)
 {
 	int			mx;
@@ -61,11 +67,10 @@ static int	render_len(int my, t_quater *pr_len, t_idata *newimg, t_vars *vars)
 
 	if (pr_len == NULL)
 		return (1);
-	mx = -1;
-	while (++mx < vars->varr.width)
+	mx = 0;
+	while (mx < vars->varr.width)
 	{
-		q = quater_rotate(vars->rqv,
-				arr_off_set(mx, my, vars->varr.arr[my][mx + 1], vars->arrof));
+		q = apply_projection(mx, my, vars);
 		if (mx)
 			put_line(newimg, crd_off_set(pr_crd.v, vars->param),
 				crd_off_set(q.v, vars->param));
@@ -74,6 +79,7 @@ static int	render_len(int my, t_quater *pr_len, t_idata *newimg, t_vars *vars)
 				crd_off_set(q.v, vars->param));
 		pr_crd = q;
 		pr_len[mx] = q;
+		mx++;
 	}
 	if (my + 1 < vars->varr.length)
 		render_len(my + 1, pr_len, newimg, vars);

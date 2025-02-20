@@ -31,9 +31,10 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define MOUSE_SENSITIVITY 0.005
+# define MOUSE_SENSITIVITY 0.005f
 # define WHEEL_SPPED 2
-# define Z_ELASTICITY 0.1
+# define Z_ELASTICITY 0.1f
+# define PERSP_FACTER 0.09f
 
 typedef enum e_displaysize
 {
@@ -44,16 +45,17 @@ typedef enum e_displaysize
 typedef enum e_glaphic_flag_name
 {
 	RE_GRAPHIC,
-	MOUSE_PRESS
+	MOUSE_PRESS,
+	TOGGLE_PERSPECTIVE
 }	t_gfname;
 
 typedef enum e_defalt_value
 {
 	DEF_ZOOM = 20,
-	DEF_VIEW_X = 1,
+	DEF_VIEW_X = -1,
 	DEF_VIEW_Y = 1,
 	DEF_VIEW_Z = 1,
-	DEF_VIEW_AXIS = -30
+	DEF_VIEW_AXIS = 30
 }	t_defval;
 
 typedef struct s_imgdata
