@@ -23,10 +23,12 @@ INC_DIR		=	include
 INCLUDE		=	$(INC_DIR)/fdf.h
 
 SRC_DIR		=	src
-SRC_FILES	=	fdf.c graphic.c hook.c quaternion.c unit.c q_rsqrt.c
+SRC_FILES	=	fdf.c graphic.c hook.c quaternion.c value_set.c unit.c q_rsqrt.c
 
 OBJ_DIR 	=	obj
 OBJS 		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
+
+DEPENDENCY	=	$(patsubst %.c, $(OBJ_DIR)/%.d, $(SRC_FILES))
 
 LIBFT		=	libft
 LIBFTA		=	$(LIBFT)/libft.a
@@ -36,14 +38,16 @@ LIBMLXA		=	$(MLX_DIR)/libmlx_Linux.a
 
 all: $(LIBFT) $(NAME)
 
-$(NAME): $(OBJS) $(LIBFTA) $(INCLUDE)
+$(NAME): $(OBJS) $(LIBFTA)
 	$(CC) $(FLAGS) $(CFLAGS) $(OBJS) $(LIBFTA) $(LIBMLXA) -o $@ $(LIBX_FLAGS)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(FLAGS) $(CFLAGS) -c $< -o $@
+	$(CC) $(FLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
+
+-include $(DEPENDENCY)
 
 $(LIBFT):
 	@make -C libft/ extra

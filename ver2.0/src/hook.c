@@ -77,6 +77,8 @@ int	key_press(int keycode, t_vars *vars)
 		vars->arrof.z_elast += 0.1;
 	else if (keycode == XK_comma)
 		vars->arrof.z_elast -= 0.1;
+	else if (keycode == XK_slash)
+		vars->gflag.fl ^= (1 << TOGGLE_PERSPECTIVE);
 	else if (keycode == XK_0)
 		parameter_init(vars);
 	else
