@@ -23,8 +23,8 @@
 # include <X11/keysymdef.h>
 # include "mlx.h"
 
-# include "q_rsqrt.h"
 # include "libft.h"
+# include "q_rsqrt.h"
 # include "get_next_line.h"
 
 # ifndef M_PI

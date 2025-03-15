@@ -10,60 +10,81 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC			=	cc
-FLAGS		=	-I$(INC_DIR) -Ilibft/includes -I$(MLX_DIR)
-CFLAGS		=	-Wall -Wextra -Werror
-LIBX_FLAGS	=	-Imlx -lXext -lX11 -lm
+NAME			=	fdf
 
-MAKEFLAGS	+=	--no-print-directory
 
-NAME		=	fdf
+CC				=	cc
+FLAGS			=	-I$(INCLUDES_DIR) -I$(LIBFT_DIR)/$(INCLUDES_DIR) -I$(MLX_DIR)/$(INCLUDES_DIR)
+CFLAGS			=	-Wall -Wextra -Werror
+LIBX_FLAGS		=	-Imlx -lXext -lX11 -lm
+MAKEFLAGS		+=	--no-print-directory
 
-INC_DIR		=	include
-INCLUDE		=	$(INC_DIR)/fdf.h
+LIBFT_DIR		=	libft
+LIBFTA			=	$(LIBFT_DIR)/libft.a
 
-SRC_DIR		=	src
-SRC_FILES	=	fdf.c graphic.c hook.c quaternion.c value_set.c unit.c q_rsqrt.c
+MLX_DIR			=	libmlx
+LIBMLXA			=	$(MLX_DIR)/libmlx_Linux.a
 
-OBJ_DIR 	=	obj
-OBJS 		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-DEPENDENCY	=	$(patsubst %.c, $(OBJ_DIR)/%.d, $(SRC_FILES))
+INCLUDES_DIR	=	includes
 
-LIBFT		=	libft
-LIBFTA		=	$(LIBFT)/libft.a
+SRCS_DIR		=	./srcs
+SRC_FILES		=	fdf.c graphic.c hook.c quaternion.c value_set.c unit.c \
 
-MLX_DIR		=	libmlx
-LIBMLXA		=	$(MLX_DIR)/libmlx_Linux.a
+OBJS_DIR 		=	./objs
+OBJS 			=	$(patsubst %.c, $(OBJS_DIR)/%.o, $(SRC_FILES))
+DEPENDENCY		=	$(patsubst %.c, $(OBJS_DIR)/%.d, $(SRC_FILES))
 
-all: $(LIBFT) $(NAME)
+
+RED				=	"\033[1;31m"
+GREEN			= 	"\033[1;32m"
+YELLOW			=	"\033[1;33m"
+CYAN			=	"\033[1;36m"
+WHITE			=	"\033[1;37m"
+RESET			=	"\033[0m"
+
+
+all: $(LIBFT_DIR) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFTA)
+	@git submodule update --init --remote
 	$(CC) $(FLAGS) $(CFLAGS) $(OBJS) $(LIBFTA) $(LIBMLXA) -o $@ $(LIBX_FLAGS)
+	@echo $(GREEN)"---$(FLAG) Compiling Sccusse !---"$(RESET)
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+$(OBJS_DIR):
+	@mkdir -p $(OBJS_DIR)
 
-$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
 	$(CC) $(FLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
 
 -include $(DEPENDENCY)
 
-$(LIBFT):
+$(LIBFT_DIR):
 	@make -C libft/ extra
 
-bonus: all
+bonus:
+	@$(MAKE) all FLAG=bonus
 
 clean:
-	@make -C libft/ clean
-	@rm -rf $(OBJ_DIR)
+	@make -C $(LIBFT_DIR) clean
+	@if [ -d $(OBJS_DIR) ]; then \
+		rm -rf $(OBJS_DIR); \
+		echo $(RED)"Printf $(OBJS_DIR) deleted !"$(RESET); \
+	else \
+		echo $(CYAN)"Printf object is already deleted."$(RESET); \
+	fi
 
-fclean:	clean
-	@make -C libft/ fclean
-	@rm -f $(NAME)
+fclean: clean
+	@make -C $(LIBFT_DIR) fclean
+	@if [ -f $(NAME) ]; then \
+		rm -f $(NAME); \
+		echo $(RED)"Printf $(NAME) deleted !"$(RESET); \
+	else \
+		echo $(CYAN)"Printf archive is already deleted."$(RESET); \
+	fi
 
 re:	fclean all
 
 .DEFAULT_GOAL := all
 
-.PHONY:	all clean fclean re $(LIBFT)
+.PHONY:	all bonus clean fclean re $(LIBFT_DIR)
