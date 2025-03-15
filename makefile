@@ -14,7 +14,7 @@ NAME			=	fdf
 
 
 CC				=	cc
-FLAGS			=	-I$(INCLUDES_DIR) -I$(LIBFT_DIR)/$(INCLUDES_DIR) -I$(MLX_DIR)/$(INCLUDES_DIR)
+FLAGS			=	-I$(INCLUDES_DIR) -I$(LIBFT_DIR)/$(INCLUDES_DIR) -I$(MLX_DIR)
 CFLAGS			=	-Wall -Wextra -Werror
 LIBX_FLAGS		=	-Imlx -lXext -lX11 -lm
 MAKEFLAGS		+=	--no-print-directory
@@ -22,7 +22,7 @@ MAKEFLAGS		+=	--no-print-directory
 LIBFT_DIR		=	libft
 LIBFTA			=	$(LIBFT_DIR)/libft.a
 
-MLX_DIR			=	libmlx
+MLX_DIR			=	minilibx-linux
 LIBMLXA			=	$(MLX_DIR)/libmlx_Linux.a
 
 
@@ -44,10 +44,9 @@ WHITE			=	"\033[1;37m"
 RESET			=	"\033[0m"
 
 
-all: $(LIBFT_DIR) $(NAME)
+all: $(LIBFT_DIR) $(MLX_DIR) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFTA)
-	@git submodule update --init --remote
 	$(CC) $(FLAGS) $(CFLAGS) $(OBJS) $(LIBFTA) $(LIBMLXA) -o $@ $(LIBX_FLAGS)
 	@echo $(GREEN)"---$(FLAG) Compiling Sccusse !---"$(RESET)
 
@@ -60,7 +59,11 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
 -include $(DEPENDENCY)
 
 $(LIBFT_DIR):
-	@make -C libft/ extra
+	@git submodule update --init --remote
+	@make -C $(LIBFT_DIR)/ extra
+
+$(MLX_DIR):
+	@make -C $(MLX_DIR)/
 
 bonus:
 	@$(MAKE) all FLAG=bonus
@@ -76,6 +79,7 @@ clean:
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
+	@make -C $(MLX_DIR) clean
 	@if [ -f $(NAME) ]; then \
 		rm -f $(NAME); \
 		echo $(RED)"Printf $(NAME) deleted !"$(RESET); \
@@ -87,4 +91,4 @@ re:	fclean all
 
 .DEFAULT_GOAL := all
 
-.PHONY:	all bonus clean fclean re $(LIBFT_DIR)
+.PHONY:	all bonus clean fclean re $(LIBFT_DIR) $(MLX_DIR)
