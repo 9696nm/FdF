@@ -1,12 +1,12 @@
 .DS_Store
 .vscode
 
-obj
+objs
 
 a.out
 
 fdf
 
-maps.zip
+maps
 libft
 minilibx-linux
