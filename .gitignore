@@ -1,12 +1,12 @@
 .DS_Store
 .vscode
-.git
-git
-
-*.h.gch
-
-# test.c
-# main*.c
-a.out
 
 obj
+
+a.out
+
+fdf
+
+maps.zip
+# libft
+# minilibx-linux
